@@ -63,3 +63,6 @@ config/Redis-x64-5.0.14.1/dump.rdb
 
 # 但保留 Nacos 配置备份（脚本可重新发布）
 !config/nacos-server-3.1.1/nacos/data/tenant-config-data/
+
+# 排除其他项目的 Nacos 配置（防止误提交其他项目密钥）
+config/nacos-server-3.1.1/nacos/data/tenant-config-data/public/AIWECHAT_GROUP/
