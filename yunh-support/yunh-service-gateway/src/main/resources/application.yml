@@ -1,0 +1,86 @@
+server:
+  port: 9000
+
+logging:
+  file:
+    name: D:/vis/yunh/log/app/yunh-service-gateway.log
+
+yunh:
+  jwt:
+    secret: your_jwt_secret_here
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: yunh-auth
+          uri: lb://yunh-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-user
+          uri: lb://yunh-service-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=1
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY
+
+        - id: yunh-service-course
+          uri: lb://yunh-service-course
+          predicates:
+            - Path=/api/course/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-order
+          uri: lb://yunh-service-order
+          predicates:
+            - Path=/api/order/**,/api/cart/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-pay
+          uri: lb://yunh-service-pay
+          predicates:
+            - Path=/api/pay/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-video
+          uri: lb://yunh-service-video
+          predicates:
+            - Path=/api/video/**,/api/chapter/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-interaction
+          uri: lb://yunh-service-interaction
+          predicates:
+            - Path=/api/comment/**,/api/question/**,/api/answer/**,/api/note/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-search
+          uri: lb://yunh-service-search
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-service-statistics
+          uri: lb://yunh-service-statistics
+          predicates:
+            - Path=/api/statistics/**
+          filters:
+            - StripPrefix=1
+
+        - id: yunh-gateway-actuator
+          uri: lb://yunh-service-gateway
+          predicates:
+            - Path=/actuator/**

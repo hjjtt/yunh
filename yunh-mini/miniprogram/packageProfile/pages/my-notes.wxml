@@ -1,0 +1,41 @@
+<view class="page my-notes">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="page-eyebrow">MY NOTES</view>
+    <view class="page-title">我的笔记</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-hint" wx:if="{{loading}}">加载中...</view>
+
+  <!-- 空态 -->
+  <view class="empty-state" wx:if="{{!loading && !notes.length}}">
+    <view class="empty-icon-wrap">
+      <view class="empty-note"></view>
+    </view>
+    <view class="empty-title">暂无笔记</view>
+    <view class="empty-desc">在学习课程时记录你的笔记吧</view>
+  </view>
+
+  <!-- 笔记列表 -->
+  <view class="note-list" wx:if="{{!loading && notes.length}}">
+    <view class="note-card card" wx:for="{{notes}}" wx:key="id" bindtap="handleView" data-index="{{index}}">
+      <view class="note-head">
+        <view class="note-title">{{item.title || '无标题笔记'}}</view>
+        <view class="note-badge {{item.isPublic === 1 ? 'public' : 'private'}}">
+          {{item.isPublic === 1 ? '公开' : '私密'}}
+        </view>
+      </view>
+      <view class="note-body">{{item.content}}</view>
+      <view class="note-foot">
+        <view class="note-meta">
+          <text wx:if="{{item.createTime}}">{{item.createTime}}</text>
+        </view>
+        <view class="note-actions">
+          <view class="note-likes">♥ {{item.likeCount || 0}}</view>
+          <view class="note-delete" data-id="{{item.id}}" catchtap="handleDelete">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

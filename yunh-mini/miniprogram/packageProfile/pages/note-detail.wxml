@@ -1,0 +1,39 @@
+<view class="page note-detail" wx:if="{{note}}">
+  <!-- 笔记头部 -->
+  <view class="detail-header">
+    <view class="detail-title">{{note.title || '无标题笔记'}}</view>
+    <view class="detail-meta">
+      <view class="detail-badge {{note.isPublic === 1 ? 'public' : 'private'}}">
+        {{note.isPublic === 1 ? '公开' : '私密'}}
+      </view>
+      <view class="meta-item" wx:if="{{note.createTime}}">
+        <view class="meta-dot"></view>
+        <text>{{note.createTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 笔记内容 -->
+  <view class="detail-body card">
+    <view class="content-text">{{note.content || '（暂无内容）'}}</view>
+  </view>
+
+  <!-- 笔记信息 -->
+  <view class="detail-info card">
+    <view class="info-row">
+      <view class="info-label">点赞数</view>
+      <view class="info-value">♥ {{note.likeCount || 0}}</view>
+    </view>
+    <view class="info-row" wx:if="{{note.updateTime}}">
+      <view class="info-label">更新时间</view>
+      <view class="info-value">{{note.updateTime}}</view>
+    </view>
+  </view>
+
+  <!-- 删除按钮 -->
+  <view class="detail-actions">
+    <view class="delete-btn {{deleting ? 'disabled' : ''}}" bindtap="handleDelete">
+      {{deleting ? '删除中...' : '删除笔记'}}
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "教学台",
+  "usingComponents": {
+    "section-header": "/components/common/section-header/index"
+  }
+}

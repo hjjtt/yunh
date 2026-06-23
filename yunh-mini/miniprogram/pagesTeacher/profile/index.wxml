@@ -1,0 +1,135 @@
+<view class="page teacher-profile">
+  <!-- 头部卡片 -->
+  <view class="profile-hero" wx:if="{{userInfo}}">
+    <view class="hero-decoration"></view>
+    <view class="hero-content">
+      <view class="avatar-ring">
+        <view class="avatar">{{avatarLetter}}</view>
+      </view>
+      <view class="hero-info">
+        <view class="hero-name">{{profileTitle}}</view>
+        <view class="hero-badge">
+          <view class="badge-dot"></view>
+          <text>教师</text>
+        </view>
+      </view>
+    </view>
+    <view class="hero-stats">
+      <view class="hero-stat">
+        <view class="hero-stat-num">{{stats.courseCount}}</view>
+        <view class="hero-stat-lbl">课程</view>
+      </view>
+      <view class="hero-stat-divider"></view>
+      <view class="hero-stat">
+        <view class="hero-stat-num">{{stats.studentCount}}</view>
+        <view class="hero-stat-lbl">学员</view>
+      </view>
+      <view class="hero-stat-divider"></view>
+      <view class="hero-stat">
+        <view class="hero-stat-num">{{stats.teachingDays}}</view>
+        <view class="hero-stat-lbl">授课天数</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="profile-hero hero-empty" wx:if="{{!userInfo}}">
+    <view class="hero-decoration"></view>
+    <view class="hero-content">
+      <view class="avatar-ring">
+        <view class="avatar">?</view>
+      </view>
+      <view class="hero-info">
+        <view class="hero-name">未登录</view>
+        <view class="hero-badge">
+          <view class="badge-dot"></view>
+          <text>登录后查看更多</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="section" wx:if="{{userInfo}}">
+    <section-header eyebrow="QUICK ACCESS" title="快捷入口" compact />
+    <view class="shortcut-grid">
+      <view class="shortcut-item" bindtap="goToCourseManage">
+        <view class="shortcut-icon icon-manage">
+          <view class="icon-inner"></view>
+        </view>
+        <view class="shortcut-text">课程管理</view>
+      </view>
+      <view class="shortcut-item" bindtap="goToStats">
+        <view class="shortcut-icon icon-stats">
+          <view class="icon-inner"></view>
+        </view>
+        <view class="shortcut-text">数据统计</view>
+      </view>
+      <view class="shortcut-item" bindtap="goToCreateCourse">
+        <view class="shortcut-icon icon-create">
+          <view class="icon-inner"></view>
+        </view>
+        <view class="shortcut-text">创建课程</view>
+      </view>
+      <view class="shortcut-item" bindtap="goMyNotes">
+        <view class="shortcut-icon icon-notes">
+          <view class="icon-inner"></view>
+        </view>
+        <view class="shortcut-text">我的笔记</view>
+      </view>
+      <view class="shortcut-item" bindtap="goMyComments">
+        <view class="shortcut-icon icon-comments">
+          <view class="icon-inner"></view>
+        </view>
+        <view class="shortcut-text">课程评论</view>
+      </view>
+      <view class="shortcut-item" bindtap="goMyQuestions">
+        <view class="shortcut-icon icon-qa">
+          <view class="icon-inner"></view>
+        </view>
+        <view class="shortcut-text">课程问答</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 账号信息 -->
+  <view class="section" wx:if="{{userInfo}}">
+    <section-header eyebrow="ACCOUNT" title="账号信息" compact />
+    <view class="info-card card">
+      <view class="info-row">
+        <view class="info-icon info-icon-user"></view>
+        <view class="info-content">
+          <view class="info-label">用户名</view>
+          <view class="info-value">{{userInfo.username || '--'}}</view>
+        </view>
+      </view>
+      <view class="info-row">
+        <view class="info-icon info-icon-nick"></view>
+        <view class="info-content">
+          <view class="info-label">昵称</view>
+          <view class="info-value">{{userInfo.nickname || '--'}}</view>
+        </view>
+      </view>
+      <view class="info-row">
+        <view class="info-icon info-icon-email"></view>
+        <view class="info-content">
+          <view class="info-label">邮箱</view>
+          <view class="info-value">{{userInfo.email || '--'}}</view>
+        </view>
+      </view>
+      <view class="info-row">
+        <view class="info-icon info-icon-phone"></view>
+        <view class="info-content">
+          <view class="info-label">手机号</view>
+          <view class="info-value">{{userInfo.phone || '--'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-btn" wx:if="{{userInfo}}" bindtap="handleLogout">
+    <view class="logout-line"></view>
+    <text>退出登录</text>
+    <view class="logout-line"></view>
+  </view>
+</view>

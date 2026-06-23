@@ -1,0 +1,131 @@
+<view class="page">
+
+  <!-- 用户头像卡片 -->
+  <view class="user-header">
+    <view class="user-avatar">
+      <view class="avatar-circle">{{avatarLetter}}</view>
+    </view>
+    <view class="user-info">
+      <view class="user-name">{{profileTitle}}</view>
+      <view class="user-sub">{{profileSubtitle}}</view>
+    </view>
+    <view class="user-role">{{userInfo.role === 'ADMIN' ? '管理员' : '学员'}}</view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-row">
+    <view class="stats-item">
+      <view class="stats-num text-serif">{{profileStats[0].value || 0}}</view>
+      <view class="stats-label">已购课程</view>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <view class="stats-num text-serif">{{profileStats[1].value || 0}}</view>
+      <view class="stats-label">订单数</view>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <view class="stats-num text-serif">{{profileStats[2].value || '--'}}</view>
+      <view class="stats-label">账号状态</view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="card shortcut-card">
+    <view class="shortcut-grid">
+      <view class="shortcut-item" bindtap="goMyCourse">
+        <view class="shortcut-icon">
+          <view class="sc-book"></view>
+        </view>
+        <view class="shortcut-text">我的课程</view>
+      </view>
+      <view class="shortcut-item" bindtap="goMyOrder">
+        <view class="shortcut-icon">
+          <view class="sc-receipt"></view>
+        </view>
+        <view class="shortcut-text">我的订单</view>
+      </view>
+      <view class="shortcut-item" bindtap="goCourseList">
+        <view class="shortcut-icon">
+          <view class="sc-compass"></view>
+        </view>
+        <view class="shortcut-text">课程库</view>
+      </view>
+      <view class="shortcut-item" bindtap="handleLogout">
+        <view class="shortcut-icon">
+          <view class="sc-exit"></view>
+        </view>
+        <view class="shortcut-text">退出登录</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习互动 -->
+  <view class="card shortcut-card" wx:if="{{userInfo}}">
+    <view class="interaction-title">学习互动</view>
+    <view class="shortcut-grid">
+      <view class="shortcut-item" bindtap="goMyNotes">
+        <view class="shortcut-icon">
+          <view class="sc-note"></view>
+        </view>
+        <view class="shortcut-text">我的笔记</view>
+      </view>
+      <view class="shortcut-item" bindtap="goMyComments">
+        <view class="shortcut-icon">
+          <view class="sc-comment"></view>
+        </view>
+        <view class="shortcut-text">课程评论</view>
+      </view>
+      <view class="shortcut-item" bindtap="goMyQuestions">
+        <view class="shortcut-icon">
+          <view class="sc-question"></view>
+        </view>
+        <view class="shortcut-text">课程问答</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近课程 -->
+  <view class="card section-card">
+    <view class="section-head">
+      <view class="section-title">最近课程</view>
+      <view class="section-link" bindtap="goMyCourse">查看全部</view>
+    </view>
+    <view wx:if="{{!myCourses.length}}" class="empty-hint">
+      还没有已购课程，去课程库逛逛吧
+    </view>
+    <view wx:else class="course-list">
+      <view class="course-row" wx:for="{{myCourses}}" wx:key="courseId" bindtap="goMyCourse">
+        <view class="course-dot"></view>
+        <view class="course-info">
+          <view class="course-name">{{item.courseName}}</view>
+          <view class="course-meta">{{item.teacherName}} · ￥{{item.price}}</view>
+        </view>
+        <view class="course-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近订单 -->
+  <view class="card section-card">
+    <view class="section-head">
+      <view class="section-title">最近订单</view>
+      <view class="section-link" bindtap="goMyOrder">查看全部</view>
+    </view>
+    <view wx:if="{{!orderList.length}}" class="empty-hint">
+      暂无订单记录
+    </view>
+    <view wx:else class="order-list">
+      <view class="order-row" wx:for="{{orderList}}" wx:key="id" bindtap="goMyOrder">
+        <view class="order-body">
+          <view class="order-name">{{item.courseName}}</view>
+          <view class="order-no">{{item.orderNo}}</view>
+        </view>
+        <view class="order-status {{item.statusText === '已支付' || item.statusText === '已完成' ? 'paid' : 'pending'}}">
+          {{item.statusText}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

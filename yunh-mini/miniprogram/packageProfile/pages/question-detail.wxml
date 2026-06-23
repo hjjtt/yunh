@@ -1,0 +1,61 @@
+<view class="page question-detail" wx:if="{{question}}">
+  <!-- 问题主体 -->
+  <view class="question-main card">
+    <view class="q-title">{{question.title || '无标题'}}</view>
+    <view class="q-content" wx:if="{{question.content}}">{{question.content}}</view>
+    <view class="q-meta">
+      <view class="q-course">{{question.courseName || '未知课程'}}</view>
+      <view class="q-stats">
+        <text>{{question.answerCount || 0}} 回答</text>
+        <text>{{question.viewCount || 0}} 浏览</text>
+      </view>
+    </view>
+    <view class="q-time" wx:if="{{question.createTime}}">{{question.createTime}}</view>
+  </view>
+
+  <!-- 回答列表 -->
+  <view class="answers-section">
+    <section-header eyebrow="ANSWERS" title="全部回答 ({{answers.length}})" compact />
+
+    <view wx:if="{{answers.length}}">
+      <view class="answer-card card" wx:for="{{answers}}" wx:key="id">
+        <view class="answer-content">{{item.content}}</view>
+        <view class="answer-foot">
+          <view class="answer-meta">
+            <text wx:if="{{item.createTime}}">{{item.createTime}}</text>
+            <text class="answer-likes">♥ {{item.likeCount || 0}}</text>
+          </view>
+          <view class="answer-actions">
+            <view class="accepted-badge" wx:if="{{item.isAccepted === 1}}">✓ 已采纳</view>
+            <view class="accept-btn" wx:elif="{{!hasAccepted}}" data-id="{{item.id}}" catchtap="handleAcceptAnswer">采纳</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="no-answers" wx:if="{{!answers.length}}">
+      <view class="no-answers-icon">?</view>
+      <text>暂无回答，来写下第一个回答吧</text>
+    </view>
+  </view>
+
+  <!-- 回答输入 -->
+  <view class="answer-form card">
+    <view class="form-label">写下你的回答</view>
+    <textarea
+      class="answer-input"
+      placeholder="分享你的见解..."
+      value="{{answerContent}}"
+      bindinput="onAnswerInput"
+      maxlength="1000"
+    />
+    <view class="answer-submit {{submitting ? 'disabled' : ''}}" bindtap="handleSubmitAnswer">
+      {{submitting ? '发送中...' : '提交回答'}}
+    </view>
+  </view>
+
+  <!-- 删除 -->
+  <view class="detail-bottom">
+    <view class="delete-btn" bindtap="handleDeleteQuestion">删除问题</view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "name": "yunh-mini",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Yunh native WeChat mini program frontend",
+  "scripts": {
+    "lint": "echo \"Use WeChat DevTools or your preferred linter\""
+  }
+}

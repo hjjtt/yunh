@@ -1,0 +1,65 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# 敏感配置文件 - 不要提交到仓库
+**/application-local.yml
+**/application-prod.yml
+**/*.local.yaml
+**/*.local.yml
+!.gitignore
+!.gitattributes
+
+# 日志
+*.log
+logs/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 前端依赖和构建产物
+node_modules/
+dist/
+.temp/
+.cache/
+
+# 小程序构建产物
+miniprogram_npm/
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 运行时数据/日志（中间件本地运行后生成）
+log/
+logs/
+**/logs/
+**/sessionStore/
+config/*/data/
+config/*/logs/
+config/*/store/
+config/*/target/
+config/*/*/logs/
+config/*/*/sessionStore/
+config/Redis-x64-5.0.14.1/dump.rdb
+
+# 但保留 Nacos 配置备份（脚本可重新发布）
+!config/nacos-server-3.1.1/nacos/data/tenant-config-data/

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "数据统计",
+  "usingComponents": {
+    "section-header": "/components/common/section-header/index"
+  }
+}

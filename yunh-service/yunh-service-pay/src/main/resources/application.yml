@@ -1,0 +1,6 @@
+server:
+  port: 9005
+
+logging:
+  file:
+    name: D:/vis/yunh/log/app/yunh-service-pay.log

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "章节编辑",
+  "usingComponents": {
+    "section-header": "/components/common/section-header/index"
+  }
+}

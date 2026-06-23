@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "section-header": "/components/common/section-header/index"
+  }
+}

@@ -1,0 +1,118 @@
+.my-comments {
+  padding: 32rpx;
+  padding-bottom: calc(220rpx + env(safe-area-inset-bottom));
+}
+
+.page-header {
+  margin-bottom: 28rpx;
+}
+
+.page-eyebrow {
+  font-size: 18rpx;
+  letter-spacing: 4rpx;
+  color: var(--ink-light);
+  font-family: "Times New Roman", serif;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin-top: 6rpx;
+}
+
+.loading-hint {
+  text-align: center;
+  padding: 60rpx 0;
+  font-size: 26rpx;
+  color: var(--ink-light);
+}
+
+/* 评论列表 */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.comment-card {
+  padding: 28rpx !important;
+}
+
+.comment-content {
+  font-size: 28rpx;
+  color: var(--ink-dark);
+  line-height: 1.6;
+}
+
+.comment-foot {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-course {
+  font-size: 22rpx;
+  color: #c0392b;
+  font-weight: 500;
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.comment-time {
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+.comment-likes {
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+/* 悬浮新建按钮 */
+.fab {
+  position: fixed;
+  right: 24rpx;
+  bottom: calc(32rpx + env(safe-area-inset-bottom));
+  height: 84rpx;
+  padding: 0 28rpx 0 24rpx;
+  border-radius: 999rpx;
+  background-color: #2c3e50;
+  border: 2rpx solid rgba(45, 52, 54, 0.12);
+  box-shadow: 0 10rpx 28rpx rgba(44, 62, 80, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+}
+
+.fab:active {
+  transform: scale(0.92);
+  opacity: 0.9;
+}
+
+.fab-plus {
+  font-size: 38rpx;
+  line-height: 1;
+  font-weight: 700;
+  color: #ffffff;
+  margin-right: 10rpx;
+}
+
+.fab-text {
+  font-size: 24rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  color: #ffffff;
+  line-height: 1;
+  white-space: nowrap;
+}

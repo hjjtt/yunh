@@ -1,0 +1,102 @@
+{
+  "pages": [
+    "pages/auth/login",
+    "pages/home/index",
+    "pages/course/list",
+    "pages/search/index",
+    "pages/profile/index",
+    "pagesTeacher/home/index",
+    "pagesTeacher/course/index",
+    "pagesTeacher/stats/index",
+    "pagesTeacher/profile/index"
+  ],
+  "subpackages": [
+    {
+      "root": "packageCourse",
+      "pages": [
+        "pages/detail",
+        "pages/chapter",
+        "pages/player"
+      ]
+    },
+    {
+      "root": "packageOrder",
+      "pages": [
+        "pages/confirm",
+        "pages/result"
+      ]
+    },
+    {
+      "root": "packageProfile",
+      "pages": [
+        "pages/my-course",
+        "pages/my-order",
+        "pages/my-notes",
+        "pages/my-comments",
+        "pages/my-questions",
+        "pages/note-detail",
+        "pages/comment-detail",
+        "pages/comment-create",
+        "pages/question-detail",
+        "pages/question-create"
+      ]
+    },
+    {
+      "root": "packageTeacher",
+      "pages": [
+        "pages/course-edit",
+        "pages/chapter-edit"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTitleText": "云课堂",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#636e72",
+    "selectedColor": "#c0392b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/course/list",
+        "text": "课程"
+      },
+      {
+        "pagePath": "pages/search/index",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pagesTeacher/home/index",
+        "text": "教学台"
+      },
+      {
+        "pagePath": "pagesTeacher/course/index",
+        "text": "课程管理"
+      },
+      {
+        "pagePath": "pagesTeacher/stats/index",
+        "text": "数据"
+      },
+      {
+        "pagePath": "pagesTeacher/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

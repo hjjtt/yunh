@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: yunh-auth
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: 127.0.0.1:8848
+        namespace: public
+        username: your_nacos_username
+        password: your_password_here
+      config:
+        enabled: true
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        group: DEFAULT_GROUP
+        username: your_nacos_username
+        password: your_password_here
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8098
+        port: 8722
+      eager: true
+
+logging:
+  level:
+    com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder: ERROR
+    com.alibaba.nacos.client.config.impl: WARN

@@ -1,0 +1,84 @@
+<view class="page">
+  <view class="result-hero">
+    <view class="result-hero-main card-dark">
+      <view class="pill">支付结果</view>
+      <view class="result-status-text" wx:if="{{payDone && paySuccess}}">支付成功</view>
+      <view class="result-status-text" wx:elif="{{payDone && !paySuccess}}">支付失败</view>
+      <view class="result-status-text" wx:else>等待支付</view>
+      <view class="page-subtitle">{{courseName || '课程订单'}}</view>
+    </view>
+    <view class="result-hero-side card-light">
+      <view class="result-side-label">状态提示</view>
+      <view class="result-side-text">{{pollHint}}</view>
+    </view>
+  </view>
+
+  <view class="card result-card">
+    <view class="section-head">
+      <view class="section-title">订单信息</view>
+      <view class="section-kicker">订单号 {{orderNo}}</view>
+    </view>
+    <view class="result-meta" wx:if="{{order}}">
+      <view class="meta-row">
+        <text class="meta-label">订单状态</text>
+        <text class="meta-value">{{statusText}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-label">支付金额</text>
+        <text class="meta-value meta-price">￥{{amountText}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-label">创建时间</text>
+        <text class="meta-value">{{createTimeText}}</text>
+      </view>
+      <view class="meta-row" wx:if="{{payment}}">
+        <text class="meta-label">支付单号</text>
+        <text class="meta-value">{{payment.paymentNo}}</text>
+      </view>
+      <view class="meta-row" wx:if="{{payment}}">
+        <text class="meta-label">支付状态</text>
+        <text class="meta-value">{{paymentStatusText}}</text>
+      </view>
+    </view>
+    <view wx:else class="result-meta">
+      <view class="meta-row">
+        <text class="meta-label">提示</text>
+        <text class="meta-value">订单信息加载中...</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{polling}}" class="status-strip">自动刷新中，每 3 秒同步一次支付状态</view>
+
+  <block wx:if="{{!payDone}}">
+    <view class="sim-pay-card card">
+      <view class="section-title">确认支付</view>
+      <view class="sim-pay-desc">请核对以下支付金额，确认无误后点击支付按钮完成订单。</view>
+      <view class="sim-pay-amount">
+        <text class="sim-pay-label">应付金额</text>
+        <text class="sim-pay-price">￥{{amountText}}</text>
+      </view>
+      <view class="primary-button sim-pay-btn" bindtap="handleSimPay">
+        {{paying ? "处理中..." : "确认支付"}}
+      </view>
+    </view>
+    <view class="secondary-button result-button" bindtap="refreshStatus">手动刷新状态</view>
+  </block>
+
+  <block wx:else>
+    <view class="result-nav-card card" wx:if="{{paySuccess}}">
+      <view class="result-nav-icon">✓</view>
+      <view class="result-nav-title">支付完成</view>
+      <view class="result-nav-desc">订单已支付成功，你可以前往个人中心查看已购课程。</view>
+      <view class="primary-button result-button" bindtap="goMyCourse">查看我的课程</view>
+      <view class="secondary-button result-button" bindtap="goHome">返回首页</view>
+    </view>
+    <view class="result-nav-card card" wx:else>
+      <view class="result-nav-icon fail">✕</view>
+      <view class="result-nav-title">支付未成功</view>
+      <view class="result-nav-desc">支付过程中出现问题，你可以重新尝试或查看订单状态。</view>
+      <view class="secondary-button result-button" bindtap="refreshStatus">刷新状态</view>
+      <view class="secondary-button result-button" bindtap="goHome">返回首页</view>
+    </view>
+  </block>
+</view>

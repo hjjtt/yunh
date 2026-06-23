@@ -1,0 +1,66 @@
+<view class="page question-create">
+  <!-- 标题 -->
+  <view class="create-header">
+    <view class="create-eyebrow">NEW QUESTION</view>
+    <view class="create-title">发起提问</view>
+  </view>
+
+  <!-- 选择课程 -->
+  <view class="form-card card" wx:if="{{courseNames.length}}">
+    <view class="form-label">选择课程</view>
+    <picker mode="selector" range="{{courseNames}}" value="{{courseIndex}}" bindchange="onCourseChange">
+      <view class="form-picker">
+        <text class="picker-text">{{courseNames[courseIndex] || '请选择课程'}}</text>
+        <view class="picker-arrow"></view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="form-card card" wx:if="{{!courseNames.length}}">
+    <view class="form-empty">暂无可提问的课程</view>
+  </view>
+
+  <!-- 问题标题 -->
+  <view class="form-card card">
+    <view class="form-label">问题标题</view>
+    <input
+      class="form-input"
+      placeholder="简要描述你的问题"
+      placeholder-style="color: #b2bec3;"
+      value="{{title}}"
+      bindinput="onTitleInput"
+      maxlength="100"
+    />
+  </view>
+
+  <!-- 问题描述 -->
+  <view class="form-card card">
+    <view class="form-label">问题描述</view>
+    <textarea
+      class="form-textarea"
+      placeholder="详细描述你遇到的问题..."
+      value="{{content}}"
+      bindinput="onContentInput"
+      maxlength="1000"
+    />
+    <view class="form-count">{{content.length || 0}}/1000</view>
+  </view>
+
+  <view class="submit-panel">
+    <view class="submit-panel-inner">
+      <view class="submit-copy">
+        <view class="submit-copy-tag">READY TO ASK</view>
+        <view class="submit-copy-title">发布到课程问答区</view>
+        <view class="submit-copy-desc">
+          {{courseNames.length ? '你的问题会展示给这门课的老师和同学，方便快速获得回答' : '请先选择课程，再发起你的提问'}}
+        </view>
+      </view>
+      <view class="submit-button-shell">
+        <view class="submit-btn {{submitting || !courseNames.length ? 'disabled' : ''}}" bindtap="handleSubmit">
+          <text class="submit-btn-text">{{submitting ? '提交中...' : '发起提问'}}</text>
+          <text class="submit-btn-icon">{{submitting ? '…' : '↗'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

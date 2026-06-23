@@ -1,0 +1,85 @@
+<view class="page teacher-course">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <view class="header-eyebrow">COURSE MANAGEMENT</view>
+    <view class="header-row">
+      <view class="header-title">我的课程</view>
+      <view class="create-btn" bindtap="goToCreateCourse">+ 创建课程</view>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input
+      class="search-input"
+      placeholder="搜索课程名称"
+      value="{{searchKeyword}}"
+      bindinput="handleSearch"
+    />
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-row">
+    <view class="filter-pill {{filterStatus === 'all' ? 'active' : ''}}"
+          data-status="all" bindtap="handleFilterTap">全部</view>
+    <view class="filter-pill {{filterStatus === 'active' ? 'active' : ''}}"
+          data-status="active" bindtap="handleFilterTap">在售</view>
+    <view class="filter-pill {{filterStatus === 'off' ? 'active' : ''}}"
+          data-status="off" bindtap="handleFilterTap">下架</view>
+  </view>
+
+  <!-- 统计面板 -->
+  <view class="stats-row">
+    <view class="stats-item">
+      <view class="stats-num">{{stats.total}}</view>
+      <view class="stats-label">课程总数</view>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <view class="stats-num">{{stats.active}}</view>
+      <view class="stats-label">在售数</view>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <view class="stats-num">{{stats.totalStock}}</view>
+      <view class="stats-label">总库存</view>
+    </view>
+  </view>
+
+  <!-- 课程列表 -->
+  <view class="course-list" wx:if="{{filteredCourses.length > 0}}">
+    <view class="course-card card card-enter"
+          wx:for="{{filteredCourses}}"
+          wx:key="id"
+    >
+      <view class="card-main" data-id="{{item.id}}" bindtap="goToEditCourse">
+        <view class="card-top">
+          <view class="card-name">{{item.name}}</view>
+          <view class="card-status {{item.status === 1 ? 'active' : 'off'}}">
+            {{item.status === 1 ? '在售' : '下架'}}
+          </view>
+        </view>
+        <view class="card-meta">
+          <view class="meta-price">¥{{item.price}}</view>
+          <view class="meta-stock">库存 {{item.stock}}</view>
+          <view class="meta-time">{{item.createTime}}</view>
+        </view>
+        <view class="card-desc" wx:if="{{item.description}}">
+          {{item.description}}
+        </view>
+      </view>
+      <view class="card-actions">
+        <view class="action-btn edit" data-id="{{item.id}}" bindtap="goToEditCourse">编辑</view>
+        <view class="action-btn delete" data-id="{{item.id}}" catchtap="handleDeleteCourse">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view class="empty-state" wx:if="{{!loading && filteredCourses.length === 0}}">
+    <view class="empty-icon">📘</view>
+    <view class="empty-text" wx:if="{{searchKeyword}}">没有找到匹配的课程</view>
+    <view class="empty-text" wx:else>还没有创建课程</view>
+    <view class="empty-hint" wx:if="{{!searchKeyword}}">点击上方"创建课程"按钮开始</view>
+  </view>
+</view>

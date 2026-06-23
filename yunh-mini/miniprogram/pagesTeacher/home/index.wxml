@@ -1,0 +1,139 @@
+<view class="page teacher-home">
+  <!-- Hero 头部 -->
+  <view class="hero">
+    <view class="hero-deco"></view>
+    <view class="hero-top">
+      <view class="hero-text">
+        <view class="hero-kicker">YUNH · TEACHER</view>
+        <view class="hero-title">{{greetingTitle}}</view>
+        <view class="hero-subtitle">Manage courses, track data, and teach efficiently.</view>
+      </view>
+      <view class="hero-avatar" wx:if="{{userInfo}}">
+        <view class="avatar-ring-outer">
+          <view class="avatar-ring-inner">
+            <text>{{avatarLetter}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="hero-actions">
+      <view class="hero-btn primary" bindtap="goToCreateCourse">
+        <view class="btn-icon btn-icon-plus"></view>
+        <text>创建课程</text>
+      </view>
+      <view class="hero-btn light" bindtap="goToCourseManage">
+        <text>课程管理</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据面板 -->
+  <view class="stats-grid">
+    <view class="stat-card stat-card-accent">
+      <view class="stat-icon-wrap">
+        <view class="stat-ico ico-book"></view>
+      </view>
+      <view class="stat-body">
+        <view class="stat-value">{{stats.courseCount}}</view>
+        <view class="stat-label">我的课程</view>
+      </view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-icon-wrap">
+        <view class="stat-ico ico-shop"></view>
+      </view>
+      <view class="stat-body">
+        <view class="stat-value">{{stats.activeCount}}</view>
+        <view class="stat-label">在售课程</view>
+      </view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-icon-wrap">
+        <view class="stat-ico ico-student"></view>
+      </view>
+      <view class="stat-body">
+        <view class="stat-value">{{stats.totalStudents}}</view>
+        <view class="stat-label">总学员</view>
+      </view>
+    </view>
+    <view class="stat-card stat-card-accent">
+      <view class="stat-icon-wrap">
+        <view class="stat-ico ico-income"></view>
+      </view>
+      <view class="stat-body">
+        <view class="stat-value">¥{{stats.totalIncome}}</view>
+        <view class="stat-label">收入(30天)</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="section">
+    <section-header eyebrow="QUICK ACCESS" title="快捷操作" compact />
+    <view class="shortcut-grid">
+      <view class="shortcut-item" bindtap="goToCreateCourse">
+        <view class="shortcut-icon icon-create"></view>
+        <view class="shortcut-text">创建课程</view>
+      </view>
+      <view class="shortcut-item" bindtap="goToCourseManage">
+        <view class="shortcut-icon icon-manage"></view>
+        <view class="shortcut-text">课程管理</view>
+      </view>
+      <view class="shortcut-item" bindtap="goToStats">
+        <view class="shortcut-icon icon-stats"></view>
+        <view class="shortcut-text">数据统计</view>
+      </view>
+      <view class="shortcut-item" bindtap="goToProfile">
+        <view class="shortcut-icon icon-profile"></view>
+        <view class="shortcut-text">个人设置</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近课程 -->
+  <view class="section" wx:if="{{recentCourses.length > 0}}">
+    <section-header eyebrow="RECENT" title="最近课程" compact>
+      <view slot="extra" class="section-more" bindtap="goToCourseManage">
+        <text>查看全部</text>
+        <view class="more-arrow"></view>
+      </view>
+    </section-header>
+    <view class="course-list">
+      <view
+        class="course-card card card-enter"
+        wx:for="{{recentCourses}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goToCourseDetail"
+      >
+        <view class="course-left-bar {{item.status === 1 ? 'bar-active' : 'bar-off'}}"></view>
+        <view class="course-content">
+          <view class="course-top">
+            <view class="course-name">{{item.name}}</view>
+            <view class="course-badge {{item.status === 1 ? 'badge-active' : 'badge-off'}}">
+              {{item.status === 1 ? '在售' : '下架'}}
+            </view>
+          </view>
+          <view class="course-meta">
+            <view class="meta-price">¥{{item.price}}</view>
+            <view class="meta-divider"></view>
+            <view class="meta-info">库存 {{item.stock}}</view>
+          </view>
+        </view>
+        <view class="course-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view class="section" wx:if="{{!loading && recentCourses.length === 0}}">
+    <view class="empty-card card">
+      <view class="empty-icon-wrap">
+        <view class="empty-icon-inner"></view>
+      </view>
+      <view class="empty-title">还没有创建课程</view>
+      <view class="empty-desc">点击上方「创建课程」按钮，开始你的第一门课。</view>
+      <view class="empty-btn" bindtap="goToCreateCourse">立即创建</view>
+    </view>
+  </view>
+</view>

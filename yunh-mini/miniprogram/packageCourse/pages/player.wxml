@@ -1,0 +1,52 @@
+<view class="page">
+  <block wx:if="{{!loading && video}}">
+    <!-- 面包屑 -->
+    <view class="breadcrumb">
+      <text class="breadcrumb-link" bindtap="goBack">课程</text>
+      <text class="breadcrumb-sep">›</text>
+      <text class="breadcrumb-current">{{video.title}}</text>
+    </view>
+
+    <!-- 视频播放器 -->
+    <view class="player-wrap card">
+      <video
+        id="videoPlayer"
+        src="{{video.videoUrl}}"
+        controls
+        show-center-play-btn
+        enable-progress-gesture
+        object-fit="contain"
+        bindended="onVideoEnded"
+      />
+    </view>
+
+    <!-- 视频信息 -->
+    <view class="info-card card">
+      <view class="info-title">{{video.title}}</view>
+      <view class="info-meta">
+        <text wx:if="{{video.duration}}">时长 {{video.duration}} 秒</text>
+        <text wx:if="{{video.playCount !== undefined}}">{{video.playCount}} 次播放</text>
+      </view>
+      <view class="info-desc" wx:if="{{video.description}}">
+        {{video.description}}
+      </view>
+    </view>
+  </block>
+
+  <!-- 加载中 -->
+  <view class="loading card" wx:if="{{loading}}">
+    <view class="loading-icon-wrap">
+      <view class="loading-icon">◎</view>
+    </view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 无数据 -->
+  <view class="empty-state card" wx:if="{{!loading && !video}}">
+    <view class="empty-icon-wrap">
+      <view class="empty-play"></view>
+    </view>
+    <view class="empty-title">视频不存在</view>
+    <view class="empty-desc">该视频可能已被删除或暂时不可用</view>
+  </view>
+</view>

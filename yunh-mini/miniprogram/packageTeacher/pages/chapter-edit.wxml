@@ -1,0 +1,103 @@
+<view class="page chapter-edit">
+  <!-- 标题 -->
+  <view class="edit-header">
+    <view class="edit-eyebrow">{{isEdit ? 'EDIT CHAPTER' : 'NEW CHAPTER'}}</view>
+    <view class="edit-title">{{isEdit ? '编辑章节' : '添加章节'}}</view>
+  </view>
+
+  <!-- 章节表单 -->
+  <view class="form-section card">
+    <view class="form-group">
+      <view class="form-label">章节标题 *</view>
+      <input class="form-input"
+             value="{{form.title}}"
+             data-field="title"
+             bindinput="handleInput"
+             placeholder="请输入章节标题" />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">排序号</view>
+      <input class="form-input"
+             type="number"
+             value="{{form.sort}}"
+             data-field="sort"
+             bindinput="handleInput"
+             placeholder="1" />
+    </view>
+
+    <view class="primary-button" bindtap="handleSaveChapter">
+      {{isEdit ? '保存修改' : '创建章节'}}
+    </view>
+  </view>
+
+  <!-- 视频列表（仅编辑模式） -->
+  <view class="section" wx:if="{{isEdit}}">
+    <section-header eyebrow="VIDEOS" title="视频管理" compact />
+
+    <!-- 视频列表 -->
+    <view class="video-list" wx:if="{{videos.length > 0}}">
+      <view class="video-item card"
+            wx:for="{{videos}}"
+            wx:key="id"
+      >
+        <view class="video-info">
+          <view class="video-title">{{item.title}}</view>
+          <view class="video-meta">
+            时长 {{item.duration || 0}}s · 播放 {{item.playCount || 0}}次
+          </view>
+        </view>
+        <view class="video-delete" data-id="{{item.id}}" catchtap="handleDeleteVideo">删除</view>
+      </view>
+    </view>
+
+    <!-- 添加视频按钮 -->
+    <view class="add-video-btn secondary-button" bindtap="toggleVideoForm">
+      {{showVideoForm ? '取消' : '添加视频'}}
+    </view>
+
+    <!-- 视频表单 -->
+    <view class="video-form card" wx:if="{{showVideoForm}}">
+      <view class="form-group">
+        <view class="form-label">视频标题 *</view>
+        <input class="form-input"
+               value="{{videoForm.title}}"
+               data-field="title"
+               bindinput="handleVideoInput"
+               placeholder="请输入视频标题" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">视频 URL</view>
+        <input class="form-input"
+               value="{{videoForm.videoUrl}}"
+               data-field="videoUrl"
+               bindinput="handleVideoInput"
+               placeholder="视频地址" />
+      </view>
+
+      <view class="form-row">
+        <view class="form-group half">
+          <view class="form-label">时长(秒)</view>
+          <input class="form-input"
+                 type="number"
+                 value="{{videoForm.duration}}"
+                 data-field="duration"
+                 bindinput="handleVideoInput"
+                 placeholder="0" />
+        </view>
+        <view class="form-group half">
+          <view class="form-label">排序号</view>
+          <input class="form-input"
+                 type="number"
+                 value="{{videoForm.sort}}"
+                 data-field="sort"
+                 bindinput="handleVideoInput"
+                 placeholder="1" />
+        </view>
+      </view>
+
+      <view class="primary-button" bindtap="handleSaveVideo">添加视频</view>
+    </view>
+  </view>
+</view>

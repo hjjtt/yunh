@@ -1,0 +1,38 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 5000ms
+
+yunh:
+  jwt:
+    secret: your_jwt_secret_here
+    access-token-expire: 7200000
+    refresh-token-expire: 604800000
+    issuer: yunh-auth
+  captcha:
+    expire-seconds: 300
+    length: 4
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+        loggerLevel: BASIC
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    com.yunh.auth: debug
+    com.alibaba.cloud.nacos: ERROR
+    com.alibaba.nacos.client: ERROR
+    com.alibaba.druid.pool.DruidAbstractDataSource: WARN
+    org.springframework.boot.actuate.endpoint: ERROR

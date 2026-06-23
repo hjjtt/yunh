@@ -1,0 +1,120 @@
+/* 复古学院派风格工具类 */
+
+/* 印刷文字样式 */
+.text-serif {
+  font-family: "Times New Roman", serif;
+}
+
+.text-sans {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.text-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2rpx;
+  text-underline-offset: 4rpx;
+}
+
+.text-strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-light);
+}
+
+/* 纸张效果 */
+.paper-texture {
+  background-image: radial-gradient(#e8e4db 1px, transparent 0);
+  background-size: 20rpx 20rpx;
+}
+
+.dot-texture {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-size: 16rpx 16rpx;
+}
+
+/* 边框样式 */
+.border-solid {
+  border: 1rpx solid var(--line);
+}
+
+.border-stitch {
+  border: var(--stitch);
+}
+
+.border-book {
+  border-left: 8rpx solid var(--primary);
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6rpx 12rpx;
+  border-radius: 2rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  font-family: "Times New Roman", serif;
+  text-transform: uppercase;
+  letter-spacing: 1rpx;
+}
+
+.tag-primary {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1rpx solid var(--primary);
+}
+
+.tag-accent {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1rpx solid var(--accent);
+}
+
+.tag-gray {
+  background: #f1f3f5;
+  color: var(--ink-medium);
+  border: 1rpx solid var(--line);
+}
+
+/* 分割线 */
+.divider-solid {
+  height: 1rpx;
+  background: var(--line);
+  margin: 24rpx 0;
+}
+
+.divider-stitch {
+  height: 0;
+  border-bottom: var(--stitch);
+  margin: 24rpx 0;
+}
+
+/* 印刷式阴影 */
+.shadow-press {
+  box-shadow: var(--press-shadow);
+}
+
+.shadow-paper {
+  box-shadow: var(--paper-shadow);
+}
+
+/* 动效 - 印刷按压感 */
+.press-effect {
+  transition: all 0.2s ease;
+}
+.press-effect:active {
+  transform: translateY(2rpx);
+  box-shadow: var(--press-shadow);
+  filter: brightness(0.98);
+}
+
+/* 注释样式 - 类似课本旁注 */
+.annotation {
+  padding: 16rpx;
+  background: var(--accent-light);
+  border-left: 4rpx solid var(--accent);
+  font-size: 24rpx;
+  color: var(--accent);
+  font-style: italic;
+  margin: 16rpx 0;
+}

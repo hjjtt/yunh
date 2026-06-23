@@ -1,0 +1,129 @@
+<view class="page home-page">
+  <view class="hero-shell">
+    <view class="hero">
+      <view class="hero-topline">
+        <view class="pill">YUNH MINI</view>
+        <view class="hero-kicker">云课堂 · 在线教育平台</view>
+      </view>
+      <view class="page-title hero-title">{{greetingTitle}}</view>
+      <view class="page-subtitle hero-subtitle">{{greetingSubtitle}}</view>
+      <view class="hero-actions">
+        <view class="primary-button" bindtap="goCourseList">逛课程库</view>
+        <view wx:if="{{userInfo}}" class="secondary-button light" bindtap="goMyCourse">继续学习</view>
+        <view wx:else class="secondary-button light" bindtap="goCourseDetail">看主推课程</view>
+      </view>
+      <view class="hero-ribbon">云课堂学习季</view>
+    </view>
+
+    <view class="hero-panel" wx:if="{{featuredCourse}}">
+      <view class="hero-panel-label">本周主推</view>
+      <view class="hero-panel-title">{{featuredCourse.name}}</view>
+      <view class="hero-panel-desc">{{featuredCourse.description}}</view>
+      <view class="hero-panel-meta">
+        <view>{{featuredCourse.teacherName}}</view>
+        <view>库存 {{featuredCourse.stock || 0}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="metric-grid">
+    <view class="metric-card" wx:for="{{metrics}}" wx:key="label">
+      <view class="metric-value">{{item.value}}</view>
+      <view class="metric-label">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{userInfo}}" class="section signed-section">
+    <section-header eyebrow="Signed In" title="你的学习现场"></section-header>
+    <view class="signed-grid">
+      <view class="signed-card" bindtap="goMyCourse">
+        <view class="signed-label">继续学习</view>
+        <view class="signed-title">{{learningCourse ? learningCourse.courseName : "还没有已关联课程"}}</view>
+        <view class="signed-sub">{{learningCourse ? learningCourse.teacherName : "可以先从课程库选择一门课"}}</view>
+      </view>
+      <view class="signed-card warm" bindtap="goMyOrder">
+        <view class="signed-label">最近订单</view>
+        <view class="signed-title">{{latestOrder ? latestOrder.courseName : "暂无订单"}}</view>
+        <view class="signed-sub">{{latestOrder ? latestOrder.summaryText : "下单后这里会显示最新状态"}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <section-header eyebrow="Curated" title="精选课程"></section-header>
+    <view wx:if="{{loading}}" class="loading-card card">
+      <view class="empty-text">课程加载中...</view>
+    </view>
+    <view wx:else class="curated-grid">
+      <view class="curated-card" wx:for="{{curatedCourses}}" wx:key="id" data-id="{{item.id}}" bindtap="handleCourseTap">
+        <view class="curated-cover">
+          <image class="curated-img" src="{{item.cover}}" mode="aspectFill" />
+          <view class="curated-tag">{{item.teacherName}}</view>
+        </view>
+        <view class="curated-body">
+          <view class="curated-title">{{item.name}}</view>
+          <view class="curated-footer">
+            <text class="curated-price">￥{{item.priceText}}</text>
+            <text class="curated-stock">库存 {{item.stock || 0}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="curated-more" bindtap="goCourseList">
+      <text>查看全部 {{activeCourseCount}} 门课程</text>
+      <view class="curated-more-arrow"></view>
+    </view>
+  </view>
+
+  <view wx:if="{{visualCards.length}}" class="section">
+    <section-header eyebrow="Editorial" title="课程画报"></section-header>
+    <view class="editorial-list">
+
+      <!-- 第一条：大图主推 -->
+      <view wx:if="{{visualCards[0]}}" class="edit-hero" data-id="{{visualCards[0].id}}" bindtap="openVisualCard">
+        <view class="edit-hero-cover">
+          <image class="edit-hero-img" src="{{visualCards[0].cover}}" mode="aspectFill" />
+          <view class="edit-hero-badge">NO.{{visualCards[0].serial}}</view>
+        </view>
+        <view class="edit-hero-body">
+          <view class="edit-hero-title">{{visualCards[0].title}}</view>
+          <view class="edit-hero-desc">{{visualCards[0].description}}</view>
+          <view class="edit-hero-meta">
+            <text class="edit-teacher">{{visualCards[0].teacherName}}</text>
+            <text class="edit-price">￥{{visualCards[0].price}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 中间段：双列卡片 -->
+      <view class="edit-grid" wx:if="{{visualCards.length > 1}}">
+        <view class="edit-card" wx:for="{{visualCards}}" wx:key="id" wx:if="{{item.style === 'card'}}" data-id="{{item.id}}" bindtap="openVisualCard">
+          <view class="edit-card-cover">
+            <image class="edit-card-img" src="{{item.cover}}" mode="aspectFill" />
+            <view class="edit-card-rank">{{item.serial}}</view>
+          </view>
+          <view class="edit-card-body">
+            <view class="edit-card-title">{{item.title}}</view>
+            <view class="edit-card-meta">
+              <text>{{item.teacherName}}</text>
+              <text class="edit-price">￥{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 尾部段：紧凑列表 -->
+      <view class="edit-compact" wx:if="{{visualCards.length > 3}}">
+        <view class="edit-compact-item" wx:for="{{visualCards}}" wx:key="id" wx:if="{{item.style === 'compact'}}" data-id="{{item.id}}" bindtap="openVisualCard">
+          <view class="edit-compact-rank">{{item.serial}}</view>
+          <view class="edit-compact-info">
+            <view class="edit-compact-title">{{item.title}}</view>
+            <view class="edit-compact-meta">{{item.teacherName}} · 库存 {{item.stock}}</view>
+          </view>
+          <view class="edit-compact-price">￥{{item.price}}</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>

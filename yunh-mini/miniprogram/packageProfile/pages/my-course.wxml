@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="course-hero">
+    <view class="course-hero-main">
+      <view class="pill">Learning Shelf</view>
+      <view class="page-title">我的课程</view>
+      <view class="page-subtitle">这里展示的是用户课程关系和课程服务拼出来的真实学习清单。</view>
+    </view>
+    <view class="course-hero-side">
+      <view class="course-side-label">课程视图</view>
+      <view class="course-side-value">按用户关系实时聚合</view>
+    </view>
+  </view>
+
+  <view class="course-stats" wx:if="{{stats.length}}">
+    <view class="course-stat-card" wx:for="{{stats}}" wx:key="label">
+      <view class="course-stat-value">{{item.value}}</view>
+      <view class="course-stat-label">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card course-card-shell">
+    <view wx:if="{{loading}}" class="empty-text">课程加载中...</view>
+    <view wx:elif="{{!myCourses.length}}" class="empty-text">暂无课程记录</view>
+    <view wx:else>
+      <view class="course-item" wx:for="{{myCourses}}" wx:key="courseId">
+        <view class="course-title">{{item.courseName}}</view>
+        <view class="course-progress">{{item.teacherName}} · ￥{{item.price}}</view>
+        <view class="course-desc">{{item.description}}</view>
+      </view>
+    </view>
+  </view>
+</view>

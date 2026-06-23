@@ -1,0 +1,72 @@
+/* 复古印刷章节标题 */
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+/* 经典模式（默认）- 复古印刷风格 */
+.eyebrow {
+  font-size: 20rpx;
+  letter-spacing: 6rpx;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: "Times New Roman", serif;
+  display: inline-flex;
+  align-items: center;
+}
+
+.eyebrow::before {
+  content: "•";
+  margin-right: 12rpx;
+  font-size: 24rpx;
+}
+
+.title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--ink-dark);
+  font-family: "Times New Roman", serif;
+  padding-bottom: 8rpx;
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) 120rpx, transparent 120rpx) no-repeat left bottom;
+  background-size: 100% 3rpx;
+}
+
+.desc {
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: var(--ink-medium);
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* 紧凑模式 - 适用于教师端和内联板块 */
+.compact .eyebrow {
+  font-size: 18rpx;
+  letter-spacing: 4rpx;
+  color: var(--ink-light);
+}
+
+.compact .eyebrow::before {
+  content: none;
+}
+
+.compact .title {
+  font-size: 32rpx;
+  font-family: inherit;
+  background: none;
+  padding-bottom: 0;
+  margin-top: 4rpx;
+}
+
+.compact .desc {
+  font-size: 22rpx;
+  font-style: normal;
+}

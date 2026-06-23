@@ -1,0 +1,75 @@
+<view class="page checkout-page">
+  <view class="checkout-hero">
+    <view class="card-dark checkout-main">
+      <view class="pill">确认订单</view>
+      <view class="page-title checkout-title">{{course.name || '订单预览'}}</view>
+      <view class="page-subtitle checkout-subtitle">延续首页的深蓝主色与暖纸质感，让购买流程更完整统一。</view>
+      <view class="checkout-price-line">
+        <text class="checkout-price-prefix">￥</text>
+        <text class="checkout-price-value">{{priceText}}</text>
+      </view>
+    </view>
+
+    <view class="card-light checkout-side">
+      <view class="checkout-side-label">已选支付方式</view>
+      <view class="checkout-side-value">{{payTypeText}}</view>
+      <view class="checkout-side-note">确认后会同时创建订单记录与支付记录，便于后续查询。</view>
+    </view>
+  </view>
+
+  <view class="card checkout-card">
+    <view class="section-head">
+      <view class="section-title">订单信息</view>
+      <view class="section-kicker">提交前先核对课程与用户信息</view>
+    </view>
+
+    <view class="order-grid">
+      <view class="order-metric">
+        <view class="order-label">课程</view>
+        <view class="order-value">{{course.name || '--'}}</view>
+      </view>
+      <view class="order-metric">
+        <view class="order-label">讲师</view>
+        <view class="order-value">{{course.teacherName || '--'}}</view>
+      </view>
+      <view class="order-metric">
+        <view class="order-label">学员</view>
+        <view class="order-value">{{userDisplayName}}</view>
+      </view>
+      <view class="order-metric">
+        <view class="order-label">库存</view>
+        <view class="order-value">{{course.stock || 0}} 个名额</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card checkout-card">
+    <view class="section-head">
+      <view class="section-title">支付方式</view>
+      <view class="section-kicker">点击切换你偏好的支付渠道</view>
+    </view>
+
+    <view class="pay-type-list">
+      <view
+        class="pay-type-item {{payType === item.value ? 'active' : ''}}"
+        wx:for="{{payTypeOptions}}"
+        wx:key="value"
+        data-value="{{item.value}}"
+        bindtap="choosePayType"
+      >
+        <view class="pay-type-name">{{item.label}}</view>
+        <view class="pay-type-caption">{{item.caption}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="checkout-footer">
+    <view class="checkout-footer-copy">
+      <view class="checkout-footer-label">合计</view>
+      <view class="checkout-footer-amount">￥{{priceText}}</view>
+    </view>
+    <view class="primary-button checkout-submit" loading="{{submitting}}" bindtap="submitOrder">
+      {{submitting ? '提交中...' : '提交订单'}}
+    </view>
+  </view>
+</view>

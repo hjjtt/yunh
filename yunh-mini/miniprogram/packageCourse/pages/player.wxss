@@ -1,0 +1,103 @@
+/* ========== 面包屑 ========== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 16rpx 32rpx;
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+.breadcrumb-link {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.breadcrumb-sep {
+  color: var(--ink-light);
+}
+
+.breadcrumb-current {
+  color: var(--ink-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 360rpx;
+}
+
+/* ========== 播放器 ========== */
+.player-wrap {
+  margin: 0 32rpx 24rpx;
+  overflow: hidden;
+  padding: 0 !important;
+  background: #000 !important;
+  border-left: none !important;
+}
+
+.player-wrap video {
+  width: 100%;
+}
+
+/* ========== 信息卡 ========== */
+.info-card {
+  margin: 0 32rpx 24rpx;
+}
+
+.info-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--ink-dark);
+}
+
+.info-meta {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: var(--ink-medium);
+}
+
+.info-desc {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: var(--ink-medium);
+  line-height: 1.6;
+}
+
+/* ========== 加载态 ========== */
+.loading {
+  margin: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300rpx;
+  font-size: 28rpx;
+  color: var(--ink-light);
+  gap: 20rpx;
+}
+
+.loading-icon {
+  font-size: 40rpx;
+  color: var(--ink-light);
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========== 空态 ========== */
+.empty-state {
+  margin: 32rpx;
+}
+
+.empty-play {
+  width: 0;
+  height: 0;
+  border-top: 20rpx solid transparent;
+  border-bottom: 20rpx solid transparent;
+  border-left: 32rpx solid var(--ink-light);
+  margin-left: 6rpx;
+}

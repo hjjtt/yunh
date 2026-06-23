@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yunh</groupId>
+        <artifactId>yunh-pojo</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>yunh-pojo-interaction</artifactId>
+    <packaging>jar</packaging>
+
+    <description>互动实体模块（评论、问答、笔记）</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yunh</groupId>
+            <artifactId>yunh-pojo-common</artifactId>
+        </dependency>
+    </dependencies>
+</project>

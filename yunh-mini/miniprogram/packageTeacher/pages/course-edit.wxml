@@ -1,0 +1,115 @@
+<view class="page course-edit">
+  <!-- 标题 -->
+  <view class="edit-header">
+    <view class="edit-eyebrow">{{isEdit ? 'EDIT COURSE' : 'NEW COURSE'}}</view>
+    <view class="edit-title">{{isEdit ? '编辑课程' : '创建新课程'}}</view>
+  </view>
+
+  <!-- 表单区域 -->
+  <view class="form-section card">
+    <view class="form-group">
+      <view class="form-label">课程名称 *</view>
+      <input class="form-input"
+             value="{{form.name}}"
+             data-field="name"
+             bindinput="handleInput"
+             placeholder="请输入课程名称" />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">课程描述</view>
+      <textarea class="form-textarea"
+                value="{{form.description}}"
+                data-field="description"
+                bindinput="handleInput"
+                placeholder="请输入课程描述"
+                maxlength="500"
+                auto-height />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">讲师名称</view>
+      <input class="form-input"
+             value="{{form.teacherName}}"
+             data-field="teacherName"
+             bindinput="handleInput"
+             placeholder="讲师名称" />
+    </view>
+
+    <view class="form-row">
+      <view class="form-group half">
+        <view class="form-label">价格 (元)</view>
+        <input class="form-input"
+               type="digit"
+               value="{{form.price}}"
+               data-field="price"
+               bindinput="handleInput"
+               placeholder="0.00" />
+      </view>
+      <view class="form-group half">
+        <view class="form-label">库存</view>
+        <input class="form-input"
+               type="number"
+               value="{{form.stock}}"
+               data-field="stock"
+               bindinput="handleInput"
+               placeholder="100" />
+      </view>
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">封面图 URL</view>
+      <input class="form-input"
+             value="{{form.cover}}"
+             data-field="cover"
+             bindinput="handleInput"
+             placeholder="选填，课程封面图链接" />
+    </view>
+
+    <view class="form-group">
+      <view class="form-label">状态</view>
+      <view class="status-switch" bindtap="toggleStatus">
+        <view class="switch-track {{form.status === 1 ? 'on' : 'off'}}">
+          <view class="switch-thumb"></view>
+        </view>
+        <view class="switch-text">{{form.status === 1 ? '上架' : '下架'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 章节管理（仅编辑模式） -->
+  <view class="section" wx:if="{{isEdit}}">
+    <section-header eyebrow="CHAPTERS" title="章节管理" compact />
+
+    <view class="chapter-list" wx:if="{{chapters.length > 0}}">
+      <view class="chapter-item card card-enter"
+            wx:for="{{chapters}}"
+            wx:key="id"
+            data-id="{{item.id}}"
+            bindtap="goToChapterEdit"
+      >
+        <view class="chapter-sort">{{item.sort || index + 1}}</view>
+        <view class="chapter-title">{{item.title}}</view>
+        <view class="chapter-arrow">›</view>
+      </view>
+    </view>
+
+    <view class="add-chapter-btn secondary-button" bindtap="goToAddChapter">
+      添加章节
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-area">
+    <view class="primary-button publish-btn" bindtap="handlePublish">
+      <view class="publish-icon"></view>
+      <text>{{form.status === 1 && isEdit ? '更新发布' : '发布课程'}}</text>
+    </view>
+    <view class="secondary-button" bindtap="handleSave">
+      {{isEdit ? '保存修改' : '保存草稿'}}
+    </view>
+    <view class="danger-button" wx:if="{{isEdit}}" bindtap="handleDelete">
+      删除课程
+    </view>
+  </view>
+</view>

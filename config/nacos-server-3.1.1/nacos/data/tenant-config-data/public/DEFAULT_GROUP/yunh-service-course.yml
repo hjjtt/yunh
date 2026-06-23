@@ -1,0 +1,70 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yunh_course?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: your_password_here
+    druid:
+      # 连接空闲检测
+      validation-query: SELECT 1
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+seata:
+  enabled: true
+  application-id: yunh-service-course
+  tx-service-group: yunh_tx_group
+  service:
+    vgroup-mapping:
+      yunh_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: ""
+      group: SEATA_GROUP
+      username: your_nacos_username
+      password: your_password_here
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: ""
+      group: SEATA_GROUP
+      data-id: seataServer.properties
+      username: your_nacos_username
+      password: your_password_here
+  data-source-proxy-mode: AT
+
+yunh:
+  course:
+    welcome: "welcome to course center"
+    version: "1.0.0"
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+        loggerLevel: BASIC
+      yunh-service-user:
+        readTimeout: 8000
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    com.yunh.course: debug
+    com.yunh.api.client: debug
+    com.alibaba.cloud.nacos: ERROR
+    com.alibaba.nacos.client: ERROR
+    org.springframework.boot.actuate.endpoint: ERROR
+    org.mybatis.spring.mapper.ClassPathMapper: ERROR
+    com.netflix.config.sources.URLConfigurationSource: ERROR

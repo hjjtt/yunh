@@ -1,0 +1,6 @@
+[features]
+shell_snapshot = false
+
+[shell_environment_policy]
+inherit = "all"
+set = { SystemRoot = "C:\\Windows", SYSTEMROOT = "C:\\Windows", windir = "C:\\Windows", WINDIR = "C:\\Windows", ComSpec = "C:\\Windows\\System32\\cmd.exe", COMSPEC = "C:\\Windows\\System32\\cmd.exe" }

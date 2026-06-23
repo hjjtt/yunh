@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find yunh-service/yunh-service-*/src -name \"*.java\" -type f)",
+      "Bash(mvn clean:*)",
+      "mcp__zai-mcp-server__analyze_image",
+      "mcp__web-search-prime__web_search_prime",
+      "mcp__web-reader__webReader",
+      "Bash(mysql:*)",
+      "Bash(curl -s http://127.0.0.1:9000/api/statistics/course/1?startDate=2026-04-10\\\\&endDate=2026-04-15)",
+      "Bash(curl -s http://127.0.0.1:9000/api/course/teacher/14)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('code:', d.get\\('code'\\)\\); print\\('courses count:', len\\(d.get\\('data',[]\\)\\) if isinstance\\(d.get\\('data'\\), list\\) else 'NOT ARRAY'\\); print\\('first course keys:', list\\(d['data'][0].keys\\(\\)\\) if d.get\\('data'\\) else 'none'\\)\")",
+      "Bash(curl -s \"http://127.0.0.1:9000/api/statistics/course/1?startDate=2026-04-09&endDate=2026-04-15\")",
+      "Bash(python3 -c \" import sys, json d = json.load\\(sys.stdin\\) stats = d.get\\('data', []\\) print\\('statDate type:', type\\(stats[0]['statDate']\\).__name__ if stats else 'none'\\) print\\('statDate value:', stats[0].get\\('statDate'\\) if stats else 'none'\\) print\\('income value:', stats[0].get\\('income'\\) if stats else 'none'\\) print\\('income type:', type\\(stats[0].get\\('income'\\)\\).__name__ if stats else 'none'\\) print\\('count:', len\\(stats\\)\\) \")",
+      "WebSearch",
+      "Bash([ -f \"$BASE/pages/auth/login.$ext\" ])",
+      "Bash([ -f \"$BASE/pages/home/index.$ext\" ])",
+      "Bash([ -f \"$BASE/pages/course/list.$ext\" ])",
+      "Bash([ -f \"$BASE/pages/search/index.$ext\" ])",
+      "Bash([ -f \"$BASE/pages/profile/index.$ext\" ])",
+      "Bash([ -f \"$BASE/packageCourse/pages/detail.$ext\" ])",
+      "Bash([ -f \"$BASE/packageCourse/pages/chapter.$ext\" ])",
+      "Bash([ -f \"$BASE/packageCourse/pages/player.$ext\" ])",
+      "Bash([ -f \"$BASE/packageOrder/pages/confirm.$ext\" ])",
+      "Bash([ -f \"$BASE/packageOrder/pages/result.$ext\" ])",
+      "Bash([ -f \"$BASE/custom-tab-bar/index.$ext\" ])",
+      "Bash(sort find:*)",
+      "Bash(du -sh packageCourse packageOrder packageProfile packageTeacher pages pagesTeacher custom-tab-bar components assets)",
+      "Bash(du -sh .)",
+      "Bash([ -f \"components/common/section-header/index.$ext\" ])",
+      "Bash([ -f \"components/business/course-card/index.$ext\" ])",
+      "Bash(grep -q course-card __TRACKED_VAR__.wxml)",
+      "Bash(grep -q course-card __TRACKED_VAR__.json)",
+      "Bash(grep -rn 'url:.*\\\\$\\\\|url:.*`' --include=\"*.js\")"
+    ]
+  }
+}

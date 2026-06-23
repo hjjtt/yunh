@@ -1,0 +1,33 @@
+<view class="page comment-detail" wx:if="{{comment}}">
+  <!-- 评论主体 -->
+  <view class="detail-main card">
+    <view class="detail-content">{{comment.content}}</view>
+    <view class="detail-meta">
+      <view class="meta-course">{{comment.courseName || '未知课程'}}</view>
+      <view class="meta-info">
+        <text wx:if="{{comment.createTime}}">{{comment.createTime}}</text>
+        <text class="meta-likes">♥ {{comment.likeCount || 0}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 回复区 -->
+  <view class="reply-section card">
+    <view class="reply-header">回复评论</view>
+    <textarea
+      class="reply-input"
+      placeholder="写下你的回复..."
+      value="{{replyContent}}"
+      bindinput="onReplyInput"
+      maxlength="500"
+    />
+    <view class="reply-btn {{submitting ? 'disabled' : ''}}" bindtap="handleReply">
+      {{submitting ? '发送中...' : '发送回复'}}
+    </view>
+  </view>
+
+  <!-- 删除 -->
+  <view class="detail-bottom">
+    <view class="delete-btn" bindtap="handleDelete">删除评论</view>
+  </view>
+</view>

@@ -1,0 +1,62 @@
+<view class="tab-bar">
+  <view
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    class="tab-item {{selected === index ? 'active' : ''}}"
+    data-path="{{item.pagePath}}"
+    data-index="{{index}}"
+    bindtap="switchTab"
+  >
+    <!-- 学生端图标 -->
+    <block wx:if="{{!isTeacher}}">
+      <!-- 首页 - 小房子 -->
+      <view wx:if="{{index === 0}}" class="icon">
+        <view class="home-roof"></view>
+        <view class="home-body"></view>
+      </view>
+      <!-- 课程 - 书本 -->
+      <view wx:if="{{index === 1}}" class="icon">
+        <view class="book-left"></view>
+        <view class="book-right"></view>
+      </view>
+      <!-- 发现 - 指南针 -->
+      <view wx:if="{{index === 2}}" class="icon">
+        <view class="compass-outer"></view>
+        <view class="compass-needle"></view>
+      </view>
+      <!-- 我的 - 用户 -->
+      <view wx:if="{{index === 3}}" class="icon">
+        <view class="user-head"></view>
+        <view class="user-body"></view>
+      </view>
+    </block>
+
+    <!-- 教师端图标 -->
+    <block wx:if="{{isTeacher}}">
+      <!-- 教学台 - 黑板 -->
+      <view wx:if="{{index === 0}}" class="icon">
+        <view class="board-frame"></view>
+        <view class="board-ledge"></view>
+      </view>
+      <!-- 课程管理 - 讲义 -->
+      <view wx:if="{{index === 1}}" class="icon">
+        <view class="folder-back"></view>
+        <view class="folder-tab"></view>
+      </view>
+      <!-- 数据 - 柱状图 -->
+      <view wx:if="{{index === 2}}" class="icon">
+        <view class="bar bar-short"></view>
+        <view class="bar bar-tall"></view>
+        <view class="bar bar-mid"></view>
+      </view>
+      <!-- 我的 - 教师 -->
+      <view wx:if="{{index === 3}}" class="icon">
+        <view class="user-head"></view>
+        <view class="user-body"></view>
+        <view class="teacher-badge"></view>
+      </view>
+    </block>
+
+    <view class="tab-text">{{item.text}}</view>
+  </view>
+</view>

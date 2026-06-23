@@ -1,0 +1,160 @@
+<view class="page">
+  <!-- 搜索栏 -->
+  <view class="search-bar card card-enter" style="animation-delay: 0s;">
+    <view class="search-input-wrap">
+      <view class="search-icon"></view>
+      <input class="search-input"
+             placeholder="搜索课程名称、讲师..."
+             placeholder-class="search-placeholder"
+             confirm-type="search"
+             value="{{keyword}}"
+             bindinput="onSearchInput"
+             bindconfirm="doSearch" />
+      <view class="search-clear" wx:if="{{keyword}}" bindtap="clearSearch"></view>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <block wx:if="{{searching}}">
+    <view class="search-result-hint" wx:if="{{keyword}}">
+      搜索 "<text class="search-keyword">{{keyword}}</text>" ，找到 {{searchResults.length}} 门课程
+    </view>
+    <view class="card section-card" wx:if="{{searchResults.length}}">
+      <view class="grid-list">
+        <view class="grid-item" wx:for="{{searchResults}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+          <view class="grid-cover">
+            <image class="grid-cover-img" src="{{item.cover}}" mode="aspectFill" />
+            <view class="grid-cover-label">{{item.status === 1 ? '在售' : '下架'}}</view>
+          </view>
+          <view class="grid-body">
+            <view class="grid-title">{{item.name}}</view>
+            <view class="grid-meta">
+              <text>{{item.teacherName}}</text>
+              <text class="grid-price">￥{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="card section-card" wx:if="{{!searchResults.length}}">
+      <view class="empty-hint">未找到相关课程</view>
+    </view>
+  </block>
+
+  <!-- 正常发现页内容 -->
+  <block wx:if="{{!searching}}">
+  <view class="discover-hero">
+    <view class="hero-card card-dark card-enter" style="animation-delay: 0.1s;">
+      <view class="pill text-serif">Discover</view>
+      <view class="page-title text-serif">发现好课</view>
+      <view class="page-subtitle">精选推荐 · 热门课程 · 讲师风采</view>
+    </view>
+    <view class="hero-card card-light card-enter" style="animation-delay: 0.2s;">
+      <view class="hero-side-label">今日在架</view>
+      <view class="hero-side-value text-serif">{{courseList.length}} 门课程</view>
+      <view class="hero-side-sub">{{teacherCount}} 位讲师</view>
+    </view>
+  </view>
+
+  <!-- 精选推荐 -->
+  <view class="card section-card card-enter" style="animation-delay: 0.3s;">
+    <view class="section-head">
+      <view class="section-title">精选推荐</view>
+      <view class="section-kicker">编辑为你挑选的优质课程</view>
+    </view>
+    <view wx:if="{{featuredCourse}}" class="featured-banner" data-id="{{featuredCourse.id}}" bindtap="goDetail">
+      <view class="featured-cover">
+        <view class="featured-badge">EDITOR'S PICK</view>
+      </view>
+      <view class="featured-body">
+        <view class="featured-title">{{featuredCourse.name}}</view>
+        <view class="featured-desc">{{featuredCourse.description}}</view>
+        <view class="featured-meta">
+          <text class="featured-teacher">{{featuredCourse.teacherName}}</text>
+          <text class="featured-price">￥{{featuredCourse.price}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="card section-card card-enter" style="animation-delay: 0.4s;">
+    <view class="section-head">
+      <view class="section-title">课程分类</view>
+      <view class="section-kicker">按方向快速浏览</view>
+    </view>
+    <view class="category-grid">
+      <view class="category-item {{activeCategory === item.key ? 'active' : ''}}"
+            wx:for="{{categories}}" wx:key="key"
+            data-key="{{item.key}}" bindtap="switchCategory">
+        <view class="category-icon">{{item.icon}}</view>
+        <view class="category-name">{{item.label}}</view>
+        <view class="category-count">{{item.count}} 门</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热门课程 -->
+  <view class="card section-card card-enter" style="animation-delay: 0.5s;">
+    <view class="section-head">
+      <view class="section-title">热门课程</view>
+      <view class="section-kicker">按价格排序，最受欢迎的课程</view>
+    </view>
+    <view class="hot-list">
+      <view class="hot-item" wx:for="{{hotCourses}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+        <view class="hot-rank">{{index + 1}}</view>
+        <view class="hot-info">
+          <view class="hot-title">{{item.name}}</view>
+          <view class="hot-sub">{{item.teacherName}} · ￥{{item.price}}</view>
+        </view>
+        <view class="hot-arrow"></view>
+      </view>
+    </view>
+    <view wx:if="{{!hotCourses.length}}" class="empty-hint">暂无热门课程数据</view>
+  </view>
+
+  <!-- 讲师风采 -->
+  <view class="card section-card card-enter" style="animation-delay: 0.6s;">
+    <view class="section-head">
+      <view class="section-title">讲师风采</view>
+      <view class="section-kicker">来自一线的实战讲师</view>
+    </view>
+    <view class="teacher-list">
+      <view class="teacher-item" wx:for="{{teachers}}" wx:key="name">
+        <view class="teacher-avatar">
+          <view class="avatar-placeholder">{{item.name[0]}}</view>
+        </view>
+        <view class="teacher-detail">
+          <view class="teacher-name">{{item.name}}</view>
+          <view class="teacher-stats">授课 {{item.courseCount}} 门 · 均价 ￥{{item.avgPrice}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!teachers.length}}" class="empty-hint">暂无讲师信息</view>
+  </view>
+
+  <!-- 全部课程速览 -->
+  <view class="card section-card card-enter" style="animation-delay: 0.7s;">
+    <view class="section-head">
+      <view class="section-title">全部课程</view>
+      <view class="section-kicker">新课速递，持续更新</view>
+    </view>
+    <view class="grid-list">
+      <view class="grid-item" wx:for="{{filteredCourses}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+        <view class="grid-cover">
+          <image class="grid-cover-img" src="{{item.cover}}" mode="aspectFill" />
+          <view class="grid-cover-label">{{item.status === 1 ? '在售' : '下架'}}</view>
+        </view>
+        <view class="grid-body">
+          <view class="grid-title">{{item.name}}</view>
+          <view class="grid-meta">
+            <text>{{item.teacherName}}</text>
+            <text class="grid-price">￥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{!filteredCourses.length}}" class="empty-hint">当前分类暂无课程</view>
+  </view>
+  </block>
+</view>

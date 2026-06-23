@@ -1,0 +1,227 @@
+/* 复古学院风底部导航栏 */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background: #ffffff;
+  display: flex;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.06);
+  background-image: radial-gradient(#f5f3ef 1px, transparent 0);
+  background-size: 20rpx 20rpx;
+  border-top: 2rpx dashed #dcd7c9;
+  z-index: 999;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6rpx;
+  transition: all 0.2s ease;
+}
+
+.tab-item:active {
+  transform: scale(0.95);
+}
+
+.tab-item.active .tab-text {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.tab-text {
+  font-size: 20rpx;
+  color: #636e72;
+  font-family: "Times New Roman", serif;
+  letter-spacing: 1rpx;
+}
+
+.icon {
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.tab-item.active .icon {
+  transform: translateY(-2rpx);
+}
+
+/* ========== 学生端：首页图标 ========== */
+.home-roof {
+  position: absolute;
+  top: 2rpx;
+  left: 4rpx;
+  width: 0;
+  height: 0;
+  border-left: 16rpx solid transparent;
+  border-right: 16rpx solid transparent;
+  border-bottom: 10rpx solid #636e72;
+}
+.home-body {
+  position: absolute;
+  top: 8rpx;
+  left: 8rpx;
+  width: 24rpx;
+  height: 20rpx;
+  border: 2rpx solid #636e72;
+  border-top: none;
+}
+.tab-item.active .home-roof { border-bottom-color: #c0392b; }
+.tab-item.active .home-body { border-color: #c0392b; }
+
+/* ========== 学生端：课程图标 ========== */
+.book-left {
+  position: absolute;
+  top: 6rpx;
+  left: 8rpx;
+  width: 12rpx;
+  height: 28rpx;
+  border: 2rpx solid #636e72;
+  border-right: none;
+  border-radius: 2rpx 0 0 2rpx;
+}
+.book-right {
+  position: absolute;
+  top: 6rpx;
+  left: 20rpx;
+  width: 12rpx;
+  height: 28rpx;
+  border: 2rpx solid #636e72;
+  border-radius: 0 2rpx 2rpx 0;
+  background: #636e72;
+}
+.tab-item.active .book-left { border-color: #c0392b; }
+.tab-item.active .book-right { border-color: #c0392b; background: #c0392b; }
+
+/* ========== 学生端：发现图标 ========== */
+.compass-outer {
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  width: 32rpx;
+  height: 32rpx;
+  border: 2rpx solid #636e72;
+  border-radius: 50%;
+}
+.compass-needle {
+  position: absolute;
+  top: 10rpx;
+  left: 14rpx;
+  width: 0;
+  height: 0;
+  border-left: 6rpx solid transparent;
+  border-right: 6rpx solid transparent;
+  border-bottom: 16rpx solid #636e72;
+}
+.tab-item.active .compass-outer { border-color: #c0392b; }
+.tab-item.active .compass-needle { border-bottom-color: #c0392b; }
+
+/* ========== 学生端：我的图标 ========== */
+.user-head {
+  position: absolute;
+  top: 6rpx;
+  left: 12rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border: 2rpx solid #636e72;
+  border-radius: 50%;
+}
+.user-body {
+  position: absolute;
+  top: 24rpx;
+  left: 6rpx;
+  width: 28rpx;
+  height: 12rpx;
+  border: 2rpx solid #636e72;
+  border-radius: 8rpx 8rpx 0 0;
+  border-bottom: none;
+}
+.tab-item.active .user-head { border-color: #c0392b; }
+.tab-item.active .user-body { border-color: #c0392b; }
+
+/* ========== 教师端：教学台 - 黑板 ========== */
+.board-frame {
+  position: absolute;
+  top: 4rpx;
+  left: 2rpx;
+  width: 36rpx;
+  height: 24rpx;
+  border: 2rpx solid #636e72;
+  border-radius: 2rpx;
+  background: #636e72;
+}
+.board-ledge {
+  position: absolute;
+  top: 28rpx;
+  left: 6rpx;
+  width: 28rpx;
+  height: 4rpx;
+  background: #636e72;
+  border-radius: 1rpx;
+}
+.tab-item.active .board-frame { border-color: #c0392b; background: #c0392b; }
+.tab-item.active .board-ledge { background: #c0392b; }
+
+/* ========== 教师端：课程管理 - 讲义文件夹 ========== */
+.folder-back {
+  position: absolute;
+  top: 10rpx;
+  left: 4rpx;
+  width: 32rpx;
+  height: 22rpx;
+  border: 2rpx solid #636e72;
+  border-radius: 0 2rpx 2rpx 2rpx;
+}
+.folder-tab {
+  position: absolute;
+  top: 6rpx;
+  left: 4rpx;
+  width: 16rpx;
+  height: 6rpx;
+  border: 2rpx solid #636e72;
+  border-bottom: none;
+  border-radius: 2rpx 2rpx 0 0;
+}
+.tab-item.active .folder-back { border-color: #c0392b; }
+.tab-item.active .folder-tab { border-color: #c0392b; }
+
+/* ========== 教师端：数据 - 柱状图 ========== */
+.bar {
+  position: absolute;
+  bottom: 6rpx;
+  width: 8rpx;
+  background: #636e72;
+  border-radius: 2rpx 2rpx 0 0;
+}
+.bar-short {
+  left: 6rpx;
+  height: 14rpx;
+}
+.bar-tall {
+  left: 16rpx;
+  height: 26rpx;
+}
+.bar-mid {
+  left: 26rpx;
+  height: 20rpx;
+}
+.tab-item.active .bar { background: #c0392b; }
+
+/* ========== 教师端：我的 - 带教师标记 ========== */
+.teacher-badge {
+  position: absolute;
+  top: 2rpx;
+  right: 0;
+  width: 10rpx;
+  height: 10rpx;
+  background: #636e72;
+  border-radius: 50%;
+  border: 1rpx solid #ffffff;
+}
+.tab-item.active .teacher-badge { background: #c0392b; }

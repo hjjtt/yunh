@@ -1,0 +1,53 @@
+<view class="page comment-create">
+  <!-- 标题 -->
+  <view class="create-header">
+    <view class="create-eyebrow">NEW COMMENT</view>
+    <view class="create-title">发表评论</view>
+  </view>
+
+  <!-- 选择课程 -->
+  <view class="form-card card" wx:if="{{courseNames.length}}">
+    <view class="form-label">选择课程</view>
+    <picker mode="selector" range="{{courseNames}}" value="{{courseIndex}}" bindchange="onCourseChange">
+      <view class="form-picker">
+        <text class="picker-text">{{courseNames[courseIndex] || '请选择课程'}}</text>
+        <view class="picker-arrow"></view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="form-card card" wx:if="{{!courseNames.length}}">
+    <view class="form-empty">暂无可评论的课程</view>
+  </view>
+
+  <!-- 评论内容 -->
+  <view class="form-card card">
+    <view class="form-label">评论内容</view>
+    <textarea
+      class="form-textarea"
+      placeholder="写下你对这门课程的想法..."
+      value="{{content}}"
+      bindinput="onContentInput"
+      maxlength="500"
+    />
+    <view class="form-count">{{content.length || 0}}/500</view>
+  </view>
+
+  <view class="submit-panel">
+    <view class="submit-panel-inner">
+      <view class="submit-copy">
+        <view class="submit-copy-tag">READY TO POST</view>
+        <view class="submit-copy-title">发布到课程讨论区</view>
+        <view class="submit-copy-desc">
+          {{courseNames.length ? '你的评论会同步给正在学习这门课的同学和老师' : '请先选择课程，再发布你的想法'}}
+        </view>
+      </view>
+      <view class="submit-button-shell">
+        <view class="submit-btn {{submitting || !courseNames.length ? 'disabled' : ''}}" bindtap="handleSubmit">
+          <text class="submit-btn-text">{{submitting ? '提交中...' : '发布评论'}}</text>
+          <text class="submit-btn-icon">{{submitting ? '…' : '↗'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

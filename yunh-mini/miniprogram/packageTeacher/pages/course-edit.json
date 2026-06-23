@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "课程编辑",
+  "usingComponents": {
+    "section-header": "/components/common/section-header/index"
+  }
+}

@@ -1,0 +1,89 @@
+<view class="login-page">
+  <!-- 检测 token 时显示 loading -->
+  <view wx:if="{{checkingToken}}" class="splash-screen">
+    <view class="splash-logo">YH</view>
+    <view class="splash-text">正在检查登录状态...</view>
+  </view>
+
+  <!-- 正常登录界面 -->
+  <block wx:else>
+    <view class="hero-orb hero-orb-left"></view>
+    <view class="hero-orb hero-orb-right"></view>
+
+    <view class="login-shell">
+      <view class="login-hero">
+        <view class="brand-badge">YUNH ACADEMY</view>
+        <view class="hero-headline">
+          <view class="brand-title">云课堂</view>
+          <view class="brand-mark">YH</view>
+        </view>
+        <view class="brand-subtitle">学院派在线学习空间</view>
+        <view class="brand-desc">继续课程、评论、提问与学习记录，所有学习进度都会在这里衔接。</view>
+      </view>
+
+      <view class="login-card">
+        <view class="card-header">
+          <view class="card-title">账号登录</view>
+          <view class="card-subtitle">输入用户名、密码和验证码进入首页</view>
+        </view>
+
+        <view class="form-section">
+          <view class="field-block">
+            <view class="field-label">用户名</view>
+            <view class="form-group">
+              <view class="form-icon">
+                <view class="icon-user-head"></view>
+                <view class="icon-user-body"></view>
+              </view>
+              <input class="form-input"
+                     value="{{form.username}}"
+                     data-field="username"
+                     bindinput="handleInput"
+                     placeholder="请输入用户名"
+                     placeholder-style="color: #b6aea0;" />
+            </view>
+          </view>
+
+          <view class="field-block">
+            <view class="field-label">密码</view>
+            <view class="form-group">
+              <view class="form-icon icon-lock"></view>
+              <input class="form-input"
+                     password="{{!showPassword}}"
+                     value="{{form.password}}"
+                     data-field="password"
+                     bindinput="handleInput"
+                     placeholder="请输入密码"
+                     placeholder-style="color: #b6aea0;" />
+              <view class="toggle-pwd" bindtap="togglePassword">
+                <view class="eye {{showPassword ? 'open' : ''}}"></view>
+              </view>
+            </view>
+          </view>
+
+          <view class="field-block">
+            <view class="field-label">验证码</view>
+            <view class="form-group captcha-group">
+              <input class="form-input captcha-input"
+                     value="{{form.captchaCode}}"
+                     data-field="captchaCode"
+                     bindinput="handleInput"
+                     placeholder="请输入验证码"
+                     placeholder-style="color: #b6aea0;" />
+              <view class="captcha-box" bindtap="fetchCaptcha">
+                <image wx:if="{{captchaImage}}" class="captcha-img" src="data:image/png;base64,{{captchaImage}}" mode="aspectFit" />
+                <view wx:else class="captcha-text">--</view>
+                <view class="captcha-refresh">点击刷新</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <button class="login-btn" loading="{{loading}}" bindtap="handleLogin">
+          立即登录
+        </button>
+        <view class="login-tip">登录后将自动跳转到对应首页</view>
+      </view>
+    </view>
+  </block>
+</view>

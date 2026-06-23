@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="card">
+    <view class="section-title">课程章节</view>
+    <view class="chapter-list">
+      <view class="chapter-item" wx:for="{{chapterList}}" wx:key="id">
+        <!-- 章节头部 -->
+        <view class="chapter-header" bindtap="toggleChapter" data-id="{{item.id}}">
+          <view class="chapter-info">
+            <view class="chapter-title">{{item.title}}</view>
+            <view class="chapter-meta">
+              <text class="chapter-sort">排序 {{item.sort}}</text>
+              <text class="chapter-count" wx:if="{{item.videos.length}}">{{item.videos.length}} 个视频</text>
+            </view>
+          </view>
+          <view class="chapter-arrow {{expandedMap[item.id] ? 'expanded' : ''}}"></view>
+        </view>
+
+        <!-- 视频子列表 -->
+        <view class="video-list" wx:if="{{expandedMap[item.id] && item.videos.length}}">
+          <view class="video-item" wx:for="{{item.videos}}" wx:for-item="video" wx:key="id"
+                bindtap="goPlayer" data-id="{{video.id}}">
+            <view class="video-icon"></view>
+            <view class="video-info">
+              <view class="video-title">{{video.title}}</view>
+              <view class="video-meta">
+                <text wx:if="{{video.duration}}">{{video.duration}} 秒</text>
+                <text wx:if="{{video.playCount}}">{{video.playCount}} 次播放</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 章节下无视频 -->
+        <view class="no-video" wx:if="{{expandedMap[item.id] && !item.videos.length}}">
+          暂无视频
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

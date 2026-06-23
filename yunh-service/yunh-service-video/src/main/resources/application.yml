@@ -1,0 +1,6 @@
+server:
+  port: 9006
+
+logging:
+  file:
+    name: D:/vis/yunh/log/app/yunh-service-video.log

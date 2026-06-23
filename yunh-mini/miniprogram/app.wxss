@@ -1,0 +1,271 @@
+:root {
+  /* 复古学院派风格 - 独特设计系统 */
+  --primary: #2c3e50; /* 墨蓝主色 - 老课本封面色 */
+  --primary-light: #ecf0f1;
+  --accent: #c0392b; /* 砖红强调色 - 老式红笔批注色 */
+  --accent-light: #fae1dd;
+  --paper: #f8f5f0; /* 米黄纸张色 - 道林纸质感 */
+  --ink-dark: #2d3436; /* 深墨色 - 印刷文字色 */
+  --ink-medium: #636e72; /* 中墨色 - 正文注释色 */
+  --ink-light: #b2bec3; /* 浅墨色 - 辅助文字色 */
+  --line: #dcd7c9; /* 装订线色 - 老式笔记本线条 */
+  --press-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06); /* 凸版印刷压痕阴影 */
+  --paper-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08); /* 纸张叠放阴影 */
+  --stitch: 2rpx dashed #dcd7c9; /* 缝线边框 - 手工装订感 */
+  --radius-sm: 4rpx; /* 印刷品圆角 */
+  --radius-lg: 8rpx; /* 卡片内圆角 */
+}
+
+@import "./styles/optimize.wxss";
+
+page {
+  background: var(--paper);
+  color: var(--ink-dark);
+  font-size: 28rpx;
+  line-height: 1.7;
+  /* 印刷字体搭配：衬线做标题，无衬线做正文 */
+  font-family: "Times New Roman", "PingFang SC", "Microsoft YaHei", serif;
+  /* 纸张纹理背景 */
+  background-image: radial-gradient(#e8e4db 1px, transparent 0);
+  background-size: 20rpx 20rpx;
+  background-position: 0 0, 10rpx 10rpx;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 32rpx;
+  box-sizing: border-box;
+  /* 底部预留足够空间，避免内容被底部导航栏挡住，适配不同手机安全区域 */
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+  /* 页面两侧装订线效果 */
+  border-left: 1rpx solid var(--line);
+  border-right: 1rpx solid var(--line);
+  margin: 0 16rpx;
+}
+
+/* 全局统一卡片样式：和主页一致的复古学院风格 */
+.card {
+  background: #ffffff;
+  border-radius: 4rpx; /* 小圆角更像印刷品 */
+  padding: 32rpx 32rpx 32rpx 40rpx;
+  box-shadow: var(--paper-shadow);
+  border: 1rpx solid var(--line);
+  border-left: 6rpx solid var(--primary); /* 左侧装订边 */
+  transition: all 0.2s ease;
+  /* 轻微纸张纹理 */
+  background-image: radial-gradient(#f5f3ef 1px, transparent 0);
+  background-size: 20rpx 20rpx;
+}
+
+/* 按压动效：模拟纸张按压感，装订边变色 */
+.card:active {
+  transform: translateY(2rpx) scale(0.98);
+  box-shadow: var(--press-shadow);
+  /* 点击时模拟按压印刷效果 */
+  filter: brightness(0.98);
+  border-left-color: var(--accent);
+}
+
+/* 高亮卡片（主推/重要内容） */
+.card.highlight {
+  border-left-color: var(--accent);
+  background: var(--accent-light);
+}
+.card.highlight:active {
+  border-left-color: var(--primary);
+}
+
+/* 卡片入场动画通用类，列表页可以直接用 */
+@keyframes cardSlideIn {
+  from {
+    transform: translateY(20rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.card-enter {
+  animation: cardSlideIn 0.4s ease forwards;
+  opacity: 0;
+}
+
+/* ========== 全局特殊卡片样式 ========== */
+/* 深色主卡片：用于详情、重要展示模块（左边课程详情卡用这个） */
+.card-dark {
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: 4rpx;
+  padding: 32rpx 32rpx 32rpx 40rpx;
+  box-shadow: var(--paper-shadow);
+  border-left: 6rpx solid var(--accent);
+  transition: all 0.2s ease;
+  /* 深色网点纹理 */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 16rpx 16rpx;
+}
+.card-dark:active {
+  transform: translateY(2rpx) scale(0.98);
+  box-shadow: var(--press-shadow);
+  filter: brightness(0.95);
+  border-left-color: #ffffff;
+}
+
+/* 浅色辅助卡片：用于价格、提示、侧边模块（右边价格卡用这个） */
+.card-light {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 4rpx;
+  padding: 32rpx;
+  box-shadow: var(--paper-shadow);
+  border: 1rpx solid rgba(192, 57, 43, 0.2);
+  border-left: 6rpx solid var(--accent);
+  transition: all 0.2s ease;
+  /* 浅色网点纹理 */
+  background-image: radial-gradient(rgba(192, 57, 43, 0.05) 1px, transparent 0);
+  background-size: 16rpx 16rpx;
+}
+.card-light:active {
+  transform: translateY(2rpx) scale(0.98);
+  box-shadow: var(--press-shadow);
+  background: rgba(192, 57, 43, 0.15);
+}
+
+/* 价格专用样式：复古印刷感大号货币符号 */
+.price-symbol {
+  font-family: "Times New Roman", serif;
+  font-size: 64rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+.price-text {
+  font-family: "Times New Roman", serif;
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  margin-top: 12rpx;
+  color: var(--text-secondary);
+  font-size: 24rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 22rpx;
+}
+
+.primary-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 88rpx;
+  border-radius: 4rpx;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 600;
+  box-shadow: var(--press-shadow);
+  transition: all 0.2s ease;
+  border: 2rpx solid var(--primary);
+  /* 印刷字体 */
+  letter-spacing: 2rpx;
+  text-transform: uppercase;
+  font-family: "Times New Roman", serif;
+}
+
+.primary-button:active {
+  transform: translateY(2rpx);
+  box-shadow: none;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.secondary-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 88rpx;
+  border-radius: 4rpx;
+  border: 2rpx solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  letter-spacing: 2rpx;
+  text-transform: uppercase;
+  font-family: "Times New Roman", serif;
+}
+
+.secondary-button:active {
+  transform: translateY(2rpx);
+  background: var(--primary-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.empty-text {
+  color: var(--text-secondary);
+  font-size: 24rpx;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20rpx;
+}
+
+/* ========== 全局空状态 ========== */
+.empty-state {
+  text-align: center;
+  padding: 80rpx 32rpx;
+}
+
+.empty-icon-wrap {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-title {
+  margin-top: 24rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--ink-dark);
+}
+
+.empty-desc {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: var(--ink-light);
+}
+
+.empty-hint {
+  text-align: center;
+  padding: 40rpx 0;
+  font-size: 24rpx;
+  color: var(--ink-light);
+}

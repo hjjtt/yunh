@@ -1,0 +1,6 @@
+server:
+  port: 9002
+
+logging:
+  file:
+    name: D:/vis/yunh/log/app/yunh-service-course.log

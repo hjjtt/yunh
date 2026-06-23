@@ -1,0 +1,6 @@
+server:
+  port: 9010
+
+logging:
+  file:
+    name: D:/vis/yunh/log/app/yunh-service-user.log

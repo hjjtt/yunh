@@ -1,0 +1,152 @@
+.my-questions {
+  padding: 32rpx;
+  padding-bottom: calc(220rpx + env(safe-area-inset-bottom));
+}
+
+.page-header {
+  margin-bottom: 28rpx;
+}
+
+.page-eyebrow {
+  font-size: 18rpx;
+  letter-spacing: 4rpx;
+  color: var(--ink-light);
+  font-family: "Times New Roman", serif;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin-top: 6rpx;
+}
+
+.loading-hint {
+  text-align: center;
+  padding: 60rpx 0;
+  font-size: 26rpx;
+  color: var(--ink-light);
+}
+
+/* 问题列表 */
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.question-card {
+  padding: 28rpx !important;
+}
+
+.question-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+
+.question-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink-dark);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.question-body {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: var(--ink-medium);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.question-foot {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question-course {
+  font-size: 22rpx;
+  color: #c0392b;
+  font-weight: 500;
+  max-width: 280rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.question-actions {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.question-answers,
+.question-views {
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+.question-delete {
+  font-size: 22rpx;
+  color: var(--accent);
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid rgba(192, 57, 43, 0.28);
+  background: rgba(192, 57, 43, 0.08);
+}
+
+.question-delete:active {
+  background: rgba(192, 57, 43, 0.14);
+}
+
+.question-time {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+/* 悬浮新建按钮 */
+.fab {
+  position: fixed;
+  right: 24rpx;
+  bottom: calc(32rpx + env(safe-area-inset-bottom));
+  height: 84rpx;
+  padding: 0 28rpx 0 24rpx;
+  border-radius: 999rpx;
+  background-color: #2c3e50;
+  border: 2rpx solid rgba(45, 52, 54, 0.12);
+  box-shadow: 0 10rpx 28rpx rgba(44, 62, 80, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+}
+
+.fab:active {
+  transform: scale(0.92);
+  opacity: 0.9;
+}
+
+.fab-plus {
+  font-size: 38rpx;
+  line-height: 1;
+  font-weight: 700;
+  color: #ffffff;
+  margin-right: 10rpx;
+}
+
+.fab-text {
+  font-size: 24rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  color: #ffffff;
+  line-height: 1;
+  white-space: nowrap;
+}

@@ -1,0 +1,199 @@
+<view class="page detail-page">
+  <view wx:if="{{loading}}" class="card detail-loading">
+    <view class="empty-text">课程详情加载中...</view>
+  </view>
+
+  <block wx:else>
+    <view class="detail-hero">
+      <view class="card-dark hero-main">
+        <view class="detail-topline">
+          <view class="pill text-serif">课程档案</view>
+          <view class="detail-serial text-serif">编号 {{course.id || '--'}}</view>
+        </view>
+        <view class="page-title detail-title text-serif">{{course.name || '未命名课程'}}</view>
+        <view class="page-subtitle detail-subtitle">{{teacherDisplayName}}</view>
+        <view class="summary detail-summary">{{course.description || '在这里查看课程章节、视频内容与购买信息，快速完成报名。'}}</view>
+        <view class="hero-badges">
+          <view class="hero-badge tag" wx:for="{{heroBadges}}" wx:key="*this">{{item}}</view>
+        </view>
+      </view>
+
+      <view class="card-light hero-price-panel dynamic-price-card">
+        <view class="hero-price-label text-serif">报名价格</view>
+        <view class="price-block">
+          <text class="price-prefix">￥</text>
+          <text class="price-text-display">{{priceText}}</text>
+        </view>
+        <view class="hero-stock stock-flash">
+          <text class="stock-dot"></text>
+          {{stockText}}
+        </view>
+        <view class="hero-price-note">从课程详情直接进入确认订单页，完成支付方式选择与下单流程。</view>
+        <view class="mini-buy-button" bindtap="goConfirmOrder">{{buyButtonText}}</view>
+      </view>
+    </view>
+
+    <view class="grid-two detail-stats">
+      <view class="card stat-card">
+        <view class="stat-value">{{chapterList.length}}</view>
+        <view class="stat-label">章节数量</view>
+      </view>
+      <view class="card stat-card">
+        <view class="stat-value">{{totalDurationText}}</view>
+        <view class="stat-label">总时长</view>
+      </view>
+    </view>
+
+    <view class="card detail-card purchase-card">
+      <view class="section-head">
+        <view class="section-title">购买信息</view>
+        <view class="section-kicker">延续首页的复古纸张与深蓝主视觉</view>
+      </view>
+      <view class="purchase-grid">
+        <view class="purchase-metric">
+          <view class="purchase-label">价格</view>
+          <view class="purchase-value">￥{{priceText}}</view>
+        </view>
+        <view class="purchase-metric">
+          <view class="purchase-label">讲师</view>
+          <view class="purchase-value">{{teacherDisplayName}}</view>
+        </view>
+        <view class="purchase-metric">
+          <view class="purchase-label">库存</view>
+          <view class="purchase-value">{{stockText}}</view>
+        </view>
+        <view class="purchase-metric">
+          <view class="purchase-label">包含内容</view>
+          <view class="purchase-value">{{chapterList.length}} 个章节 / {{videoList.length}} 个视频</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card detail-card">
+      <view class="section-head">
+        <view class="section-title">章节提要</view>
+        <view class="section-kicker">像杂志编排一样清晰展示课程结构</view>
+      </view>
+      <view class="timeline">
+        <view class="timeline-item" wx:for="{{chapterList}}" wx:key="id">
+          <view class="timeline-dot"></view>
+          <view class="timeline-content">
+            <view class="timeline-title">{{item.title}}</view>
+            <view class="timeline-sub">第 {{item.sort}} 节</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card detail-card">
+      <view class="section-head">
+        <view class="section-title">视频预览</view>
+        <view class="section-kicker">购买前快速感受课程内容节奏</view>
+      </view>
+      <view wx:if="{{previewVideos.length}}" class="preview-grid">
+        <view class="preview-card" wx:for="{{previewVideos}}" wx:key="id">
+          <view class="preview-tag">预览</view>
+          <view class="preview-title">{{item.title}}</view>
+          <view class="preview-desc">{{item.description || '课程片段预览与章节内容介绍。'}}</view>
+        </view>
+      </view>
+      <view wx:else class="empty-panel">
+        <view class="empty-panel-title">暂无预览视频</view>
+        <view class="empty-panel-desc">当前课程还没有可展示的试听片段，你仍然可以查看完整章节结构后再决定是否购买。</view>
+      </view>
+      <view class="video-list">
+        <view class="video-item" wx:for="{{videoList}}" wx:key="id">
+          <view class="video-copy">
+            <view class="video-title">{{item.title}}</view>
+            <view class="video-sub">{{item.description || '暂无视频简介。'}}</view>
+          </view>
+          <view class="video-duration">{{item.duration}} 秒</view>
+        </view>
+        <view wx:if="{{!videoList.length}}" class="video-empty">
+          <view class="empty-panel-title">暂无视频目录</view>
+          <view class="empty-panel-desc">课程视频内容稍后补充，当前可先浏览课程说明与章节信息。</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习路线卡：填补视频下方空白，复古学院风格 -->
+    <view class="card roadmap-card">
+      <view class="section-head">
+        <view class="section-title">学习路线建议</view>
+        <view class="section-kicker">按这个顺序学习效果更好</view>
+      </view>
+      <view class="roadmap-steps">
+        <view class="roadmap-step">
+          <view class="step-num">1</view>
+          <view class="step-content">
+            <view class="step-title">观看视频</view>
+            <view class="step-desc">先完整观看章节视频，理解核心概念</view>
+          </view>
+        </view>
+        <view class="roadmap-step">
+          <view class="step-num">2</view>
+          <view class="step-content">
+            <view class="step-title">动手实践</view>
+            <view class="step-desc">跟着视频敲代码，完成课后练习</view>
+          </view>
+        </view>
+        <view class="roadmap-step">
+          <view class="step-num">3</view>
+          <view class="step-content">
+            <view class="step-title">复习总结</view>
+            <view class="step-desc">回顾重点难点，整理学习笔记</view>
+          </view>
+        </view>
+        <view class="roadmap-step">
+          <view class="step-num">4</view>
+          <view class="step-content">
+            <view class="step-title">项目实战</view>
+            <view class="step-desc">用所学知识完成实战项目</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 课程权益卡：填补视频下方空白区域，复古风格 -->
+    <view class="card benefit-card">
+      <view class="section-title">报名即享权益</view>
+      <view class="benefit-grid">
+        <view class="benefit-item">
+          <view class="benefit-icon">📚</view>
+          <view class="benefit-text">配套课件源码</view>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">💬</view>
+          <view class="benefit-text">专属学习社群</view>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">✍️</view>
+          <view class="benefit-text">作业1对1批改</view>
+        </view>
+        <view class="benefit-item">
+          <view class="benefit-icon">🎫</view>
+          <view class="benefit-text">1年内免费更新</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习保障卡：复古票据风格 -->
+    <view class="card guarantee-card">
+      <view class="guarantee-content">
+        <view class="guarantee-tag">放心购</view>
+        <view class="guarantee-text">7天无理由退款 · 未学习全额退 · 课程永久有效</view>
+      </view>
+    </view>
+
+    <view class="purchase-ribbon">
+      <view class="purchase-ribbon-copy">
+        <view class="purchase-ribbon-label">准备报名</view>
+        <view class="purchase-ribbon-title">{{course.name}}</view>
+      </view>
+      <view class="purchase-ribbon-actions">
+        <view class="secondary-button purchase-secondary" bindtap="goChapter">查看章节</view>
+        <view class="primary-button purchase-primary" bindtap="goConfirmOrder">{{buyButtonText}}</view>
+      </view>
+    </view>
+  </block>
+</view>

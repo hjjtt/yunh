@@ -1,0 +1,88 @@
+.course-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18rpx;
+  margin-bottom: 22rpx;
+}
+
+.course-hero-main,
+.course-hero-side {
+  padding: 28rpx;
+  border-radius: 30rpx;
+}
+
+.course-hero-main {
+  background: linear-gradient(135deg, #111827, #0f766e);
+  color: #ffffff;
+}
+
+.course-hero-side {
+  background: linear-gradient(135deg, #fff7ed, #ffffff);
+}
+
+.course-side-label {
+  font-size: 20rpx;
+  letter-spacing: 5rpx;
+  color: #f97316;
+}
+
+.course-side-value {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #7c2d12;
+}
+
+.course-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18rpx;
+  margin-bottom: 22rpx;
+}
+
+.course-stat-card {
+  padding: 24rpx;
+  border-radius: 28rpx;
+  background: linear-gradient(135deg, #fffaf2, #ffffff);
+  box-shadow: 0 14rpx 34rpx rgba(249, 115, 22, 0.08);
+}
+
+.course-stat-value {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.course-stat-label {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #64748b;
+}
+
+.course-card-shell {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+}
+
+.course-item {
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid #e2e8f0;
+}
+
+.course-title {
+  font-size: 28rpx;
+  color: #0f172a;
+}
+
+.course-progress {
+  margin-top: 8rpx;
+  color: #64748b;
+  font-size: 24rpx;
+}
+
+.course-desc {
+  margin-top: 10rpx;
+  color: #475569;
+  font-size: 22rpx;
+  line-height: 1.7;
+}

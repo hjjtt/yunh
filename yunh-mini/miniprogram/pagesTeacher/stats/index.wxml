@@ -1,0 +1,86 @@
+<view class="page teacher-stats">
+  <!-- 标题 -->
+  <view class="stats-header">
+    <view class="stats-eyebrow">ANALYTICS</view>
+    <view class="stats-title">数据统计</view>
+  </view>
+
+  <!-- 日期选择 -->
+  <view class="date-row">
+    <view class="date-pill {{dateRange === item.value ? 'active' : ''}}"
+          wx:for="{{datePresets}}"
+          wx:key="value"
+          data-value="{{item.value}}"
+          bindtap="handleDatePreset">
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 汇总卡片 -->
+  <view class="summary-grid">
+    <view class="summary-card">
+      <view class="summary-value">{{summary.totalOrders}}</view>
+      <view class="summary-label">总订单</view>
+    </view>
+    <view class="summary-card accent">
+      <view class="summary-value">¥{{summary.totalIncome}}</view>
+      <view class="summary-label">总收入</view>
+    </view>
+    <view class="summary-card">
+      <view class="summary-value">{{summary.totalStudents}}</view>
+      <view class="summary-label">总学员</view>
+    </view>
+    <view class="summary-card">
+      <view class="summary-value">{{summary.totalViews}}</view>
+      <view class="summary-label">总浏览</view>
+    </view>
+  </view>
+
+  <!-- 收入趋势图 -->
+  <view class="chart-section" wx:if="{{chartData.length > 0}}">
+    <section-header eyebrow="INCOME TREND" title="收入趋势" compact />
+    <view class="chart-box card">
+      <canvas type="2d" id="trendChart" class="trend-canvas"></canvas>
+    </view>
+  </view>
+
+  <!-- 课程维度统计 -->
+  <view class="section">
+    <section-header eyebrow="COURSE STATS" title="课程数据" compact />
+
+    <view class="stat-list" wx:if="{{courseStats.length > 0}}">
+      <view class="stat-course card"
+            wx:for="{{courseStats}}"
+            wx:key="courseId">
+        <view class="stat-course-top">
+          <view class="stat-course-name">{{item.courseName}}</view>
+          <view class="stat-course-status {{item.status === 1 ? 'active' : 'off'}}">
+            {{item.status === 1 ? '在售' : '下架'}}
+          </view>
+        </view>
+        <view class="stat-metrics">
+          <view class="stat-metric">
+            <view class="metric-val">{{item.viewCount}}</view>
+            <view class="metric-lbl">浏览</view>
+          </view>
+          <view class="stat-metric">
+            <view class="metric-val">{{item.buyCount}}</view>
+            <view class="metric-lbl">购买</view>
+          </view>
+          <view class="stat-metric">
+            <view class="metric-val">{{item.studentCount}}</view>
+            <view class="metric-lbl">学员</view>
+          </view>
+          <view class="stat-metric income">
+            <view class="metric-val">¥{{item.income}}</view>
+            <view class="metric-lbl">收入</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-hint" wx:if="{{!loading && courseStats.length === 0}}">
+      暂无课程数据，请先创建课程
+    </view>
+  </view>
+</view>

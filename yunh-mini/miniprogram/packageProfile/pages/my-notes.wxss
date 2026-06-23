@@ -1,0 +1,118 @@
+.my-notes {
+  padding: 32rpx;
+}
+
+.page-header {
+  margin-bottom: 28rpx;
+}
+
+.page-eyebrow {
+  font-size: 18rpx;
+  letter-spacing: 4rpx;
+  color: var(--ink-light);
+  font-family: "Times New Roman", serif;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--ink-dark);
+  margin-top: 6rpx;
+}
+
+.loading-hint {
+  text-align: center;
+  padding: 60rpx 0;
+  font-size: 26rpx;
+  color: var(--ink-light);
+}
+
+/* 笔记列表 */
+.note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.note-card {
+  padding: 28rpx !important;
+}
+
+.note-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.note-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink-dark);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.note-badge {
+  padding: 4rpx 14rpx;
+  border-radius: 2rpx;
+  font-size: 20rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.note-badge.public {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.note-badge.private {
+  background: #f1f5f9;
+  color: var(--ink-medium);
+}
+
+.note-body {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: var(--ink-medium);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.note-foot {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-meta {
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+.note-actions {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.note-likes {
+  font-size: 22rpx;
+  color: var(--ink-light);
+}
+
+.note-delete {
+  font-size: 22rpx;
+  color: var(--ink-light);
+  padding: 4rpx 8rpx;
+}
+
+.note-delete:active {
+  color: #c0392b;
+}

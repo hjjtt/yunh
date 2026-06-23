@@ -1,0 +1,52 @@
+<view class="page">
+  <!-- 顶部介绍卡 -->
+  <view class="card intro-card">
+    <section-header eyebrow="Course Atlas" title="课程库" desc="浏览全部课程，支持按名称或讲师搜索筛选。"></section-header>
+
+    <!-- 搜索输入 -->
+    <input class="search-box" placeholder="搜索课程名或老师" bindinput="handleKeywordInput" value="{{keyword}}" />
+
+    <!-- 状态筛选 -->
+    <view class="filter-row">
+      <view class="filter-pill {{activeStatus === 'all' ? 'active' : ''}}" data-status="all" bindtap="switchStatus">全部</view>
+      <view class="filter-pill {{activeStatus === '1' ? 'active' : ''}}" data-status="1" bindtap="switchStatus">在售</view>
+      <view class="filter-pill {{activeStatus === '0' ? 'active' : ''}}" data-status="0" bindtap="switchStatus">下架</view>
+    </view>
+  </view>
+
+  <!-- 统计面板 -->
+  <view class="stats-row">
+    <view class="stat-card card card-enter" style="animation-delay: 0.1s;">
+      <view class="stat-value text-serif">{{stats.total}}</view>
+      <view class="stat-label">课程数</view>
+    </view>
+    <view class="stat-card card card-enter" style="animation-delay: 0.2s;">
+      <view class="stat-value text-serif">{{stats.teachers}}</view>
+      <view class="stat-label">讲师数</view>
+    </view>
+    <view class="stat-card card card-enter" style="animation-delay: 0.3s;">
+      <view class="stat-value text-serif">￥{{stats.avgPrice}}</view>
+      <view class="stat-label">均价</view>
+    </view>
+  </view>
+
+  <!-- 课程双列卡片 -->
+  <view wx:if="{{loading}}" class="empty-text">课程加载中...</view>
+  <view wx:elif="{{!filteredList.length}}" class="empty-text">没有找到匹配的课程</view>
+  <view wx:else class="course-grid">
+    <view class="course-item" wx:for="{{filteredList}}" wx:key="id" data-id="{{item.id}}" bindtap="handleCourseTap">
+      <view class="course-cover">
+        <image class="course-img" src="{{item.cover}}" mode="aspectFill" />
+        <view class="course-status {{item.status === 1 ? 'up' : 'down'}}">{{item.status === 1 ? '在售' : '下架'}}</view>
+      </view>
+      <view class="course-body">
+        <view class="course-title">{{item.name}}</view>
+        <view class="course-teacher">{{item.teacherName}}</view>
+        <view class="course-bottom">
+          <text class="course-price">￥{{item.price}}</text>
+          <text class="course-stock">库存 {{item.stock || 0}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
